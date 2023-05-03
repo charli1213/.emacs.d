@@ -1,0 +1,162 @@
+#+TITLE: Tutoriel de Org-Mode
+#+SUBTITLE: Ta vie en joli texte
+#+AUTHOR: Charles-Édouard Lizotte
+#+DATE: 29 mars 2023
+#+latex_class: org-report
+
+* Fonctionnalités de l'écriture en org-mode 
+** Délimiter les sous-sections
+Traditionnellement, dans le langage *Markdown*, on utilise le carré (#) -- ce qui est particulièrement inquiétant selon moi.
+En *Org-Mode*, on utilise plutôt les *double-triple-quadruple-étoiles*.
+*** Par exemple, ceci est une *sous-sous-section*...
+**** Et ceci est une *sous-sous-sous-section*... 
+
+** Texte en *gras*, /italique/ et _sous-ligné_. 
+Mettre du texte *en gras* à l'aide de *l'étoile de chaque côté*.\\
+
+Pour mettre du  en /italique/, on utilise la commande "/slash/" de chaque côté, de sorte que /Ceci est en italique/.\\
+
+Finalement, pour _sous-ligner_ un bout de texte, on utilise évidement le symbole /_underscore_/.
+
+** Créer des [[https://www.youtube.com/watch?v=DLzxrzFCyOs&t=1s][URLs]] et des liens symboliques
+Il est aussi possible d'utiliser la commande *Ctrl-c + Ctrl-l* pour entrer un URL à partir du /mini-buffer/. 
+Par exemple, voici un URL qui mène tout droit vers [[https://www.google.ca/][Google]]. \\
+
+Pour les *liens symboliques* vers des fichiers et des dossiers, on utilise la même technique que les URL, mais on ajoute *file* avec *Ctrl-C + Ctrld-L*. 
+Par exemple, *Ctrl-C + Ctrl-L*, puis *file + RET* pour activer naviguation à partir du /mini-buffer/.\\
+
+Prenons notre /init file/ comme un exemple :  [[file:.emacs.d/init.el][init file]] !
+
+** Citations et verbatim
+On peut toujours mettre du texte en verbatim à l'aide des commandes *#+begin_quote Test #+end_quote*.
+Par exemple,
+#+begin_quote 
+Blablabla.
+#+end_quote 
+Par contre, il faut juste s'assurer que les /begin/ et /end/ sont sur le même niveau d'indentation. 
+
+La même chose est possible lorsqu'on verbatime le texte provenant d'un bout de code,
+Par exemple,
+#+begin_src emacs-lisp
+  (setq douzaine 12)
+#+end_src
+   
+Bref, tout ça pour dire, les *#+begin* servent bien à quelque chose.
+Comme vous le verrez bientôt, on manque de verbatim dans nos vies. 
+
+* Organisation du travail et divisions du texte
+** TODO Pour créer des /TODO/ list. [1/2]
+On utlise en majuscule le *TODO*. Pour l'ajouter, mais il est bien plus amusant de jouer avec la commande *Ctrl-C + Ctrl-T* pour changer le statut d'une tâche.\\
+
+*Important*, quand on a des cases à cocher, on peut mettre un [/] à droite d'un titre pour suivre l'évolution des tâches, comme on peut le voir à droite de cette sous-section.
+- [X] tache 1
+- [ ] tache 2
+
+** DONE Un fois une tâche accomplit, on change le statut pour *DONE*. 
+Mais c'est aussi possible gosser avec *Maj-flêches* pour changer le statut
+de la tâche.
+    
+** Création de tags                                                :taglife:
+La commande *Ctrl-C + Ctrl-C* permet de créer un /tag/, comme on peut le voir à droite de cette sous-section.
+
+** Listes, énumérations numériques, alphabétiques et cases à cocher [1/3]
+Il est simple de créer une *liste de cases à cocher* à l'aide du symbole *boîte* et d'un tiret.
+Par exemple,
+- [ ] Ceci est un test avec les /bullets/;
+- [X] Ceci aussi est une test;
+- [ ] Ceci aussi est un autre test pour illustrer l'importance des cases à cocher;
+  - [ ] On remplit et après on utilise *Ctrl-c (2x)* pour changer l'état de la tâche.
+
+Il est aussi possible de créer des listes énumérant des items.
+Par exemple,
+1. blabla
+2. Premier item
+   - a) Première lettre,
+   - b) Deuxième lettre,
+3. Retour aux chiffres. 
+   + Deuxième /bulletpoint/, etc. 
+   + Le symbole *+* crée un /bulletpoint/.
+     a. Première lettre 
+4. Bon, c'est le temps de terminer tout ça.
+
+** Planification à l'aide des /Deadline/, /timestamps/, et /sheduled/
+- *Ctrl-C + Ctrl-D* : DEADLINE: <2023-03-05 Sun>
+- *Ctrl-C + Ctrl-S* : SCHEDULED: <2021-04-12 Mon>
+- Pour créer des /timestamps/ *Ctrl-c + '.'* : <2023-03-10 Fri 22:00>
+
+* Raccourcis clavier (/Hotkeys/) importants
+** *M-flèche*
+Ça /interchange/ ton paragraphe de place et *ça permet de replacer les /bulletlist/*.
+
+** *Ctrl-c + Ctrl-t*  
+Change ou applique un todo/done au niveau du titre.
+
+** *Ctrl-c + Ctrl-c* 
+Change l'état de quelque chose, comme une case à cocher, par exemple. 
+
+* La beauté de *Org-Agenda*
+SCHEDULED: <2023-03-16 Thu 21:00>
+** Introduction
+Lors de la création d'une liste munie de *TODO*, la commande *M-x org-agenda* nous permet d'observer tous nos *TODO* à l'intérieur d'un *agenda*.
+Cet accessoire est extrêmement utile, surtout lorsqu'on y associe des dates limite, des rendez-vous ou des /timestamps/. 
+
+** Ajouter le fichier à l'agenda
+Il est important de s'assurer que le fichier fait partie de notre liste de fichiers /org-agenda/. 
+Pour se faire, on peut effectuer la commande *M-x org-agenda-file-to-front*.
+Par la suite, on peut refaire l'opération *M-x org-agenda* pour voir si tout fonctionne bien.
+Après avoir joué dans l'agenda, il n'y a plus qu'à appuyer sur la touche *q* pour quitter le buffer.
+
+** Org-Agenda est la gestion des dates
+Pour beaucoup d'internautes, la fonctionnalité *org-agenda* est litérallement la raison d'être de *org-mode*, d'où le slogan
+#+begin_quote
+Your life in plain text
+#+end_quote
+
+Gérer des dates n'aura jamais été aussi simple grace à (on se rapelle) ces trois fonctions : 
+- a) *Ctrl-C .* -- Création d'un /timestamp/; <2023-03-08 Wed>
+- b) *Ctrl-c + Ctrl-d* -- Association d'un /deadline/ à notre item principal; 
+- c) *Ctrl-c + Ctrl-s* -- Association d'une programation (/shedule/) à notre item.
+
+Rappelons aussi qu'il est utile de se mouvoir dans le calendrier à l'aide des touches *Maj-flêches*.
+L'opération *Maj-flêche* est *aussi efficace sur la date dans le document org* lui-même.
+Sinon, il est aussi possible de juste écrire la date et l'heure avec les indicatifs *AM* et *PM*.
+Finalement, on se souvient qu'il est possible de faire *Ctrl-c + Ctrl-t* pour changer le statut d'une tâche en *Org-Mode*.
+Cette dernière fonctionnalité est aussi *applicable à l'intérieur de l'agenda*. 
+  
+* Les tableaux
+
+
+Pour réaliser un tableau, il faut seulement se servir de la barre verticale pour séparer des éléments quelconques. 
+De sorte que,
+|--------+-------+-------------+------------|
+|--------+-------+-------------+------------|
+| *Ceci* | *est* | *un*        | *tableau*  |
+|--------+-------+-------------+------------|
+| Pronom | Verbe | Déterminant | Nom commun |
+|--------+-------+-------------+------------|
+|--------+-------+-------------+------------|
+#+CAPTION: Ceci est un tableau qui explique les types de mots que l'on retrouve en Français.
+
+Ensuite, pour faire une ligne verticale, on utilise l'expression *|-* suivit de *Tab* pour créer une ligne. 
+De la même manière qu'à l'intérieure du texte, on peut utiliser les expressions courantes, par exemple *M-Del*, *M-B*, etc.
+
+* Citations en org-mode
+** Introduction et installation de *Org-cite*
+En Org, il est possible de citer des  ouvrages provenant de fichiers *Bibtex*.
+Il suffit d'avoir une version de Org plus récente que la *version 9.5*.
+De base *Emacs* installe la version 9.3 en date de l'écriture de ce tutoriel.
+Pour installer la bonne version de *Org* (soit [[https://elpa.gnu.org/packages/org.html][la plus récente]]), il faut
+1) Supprimer le dossier [[file:~/.emacs.d/elta][elpa]] dans notre dossier [[file:~/.emacs.d][.emacs.d]].
+   Ceci aura l'effet de tout supprimer les /packages/ installés, mais ce n'est pas très grave, *Emacs* s'occupera lui-même de les installer (/minor inconvenience/).
+2) Ré-ouvrir emacs en mode -Q justement pour empêcher *Emacs* d'installer n'importe quel /package/ de base sans notre consentement avant qu'on installe *Org*;
+3) Utiliser la commande *M-x package-install* et trouver *Org* + *RET* pour installer la dernière version de *Org*.
+Une fois ces trois tâches accomplit, on peut redémarer *Emacs* normalement et ouvrir un fichier *Org*.\\
+
+Pour plus d'info, le lecteur est invité à lire les articles
+- [[https://blog.tecosaur.com/tmio/2021-07-31-citations.html][This Month in Org : Introducing citations!]]
+- [[https://kristofferbalintona.me/posts/202206141852/][Citations in org-mode: Org-cite and Citar]]
+  
+** Utilisation
+Pour utiliser *Org-cite*, le lecteur est invité à utiliser la commande
+*M-x org-cite-insert* et de jouer là-dedans.
+Sinon, la terminologie à utilier est [cite:@blablabla]. 

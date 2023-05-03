@@ -1,0 +1,303 @@
+#+TITLE: Org-Mode et LaTeX -- Instructions et débogage
+#+AUTHOR: Charles-Édouard Lizotte
+#+DATE: <2023-03-07 Tue> 
+#+Latex_CLASS: org-report
+#+cite_export: natbib
+
+
+* Écrire des équations et ajouter un soupçon de *verbatim* dans nos vie
+On peut écrire un peu n'importe quoi. C'est pas très grave au fond. Un petit truc pour gérer les invite de commande. :
+#+begin_src emacs-lisp
+M-x comint-clear-buffer
+#+end_src
+permet de tout effacer d'un coup. MAGIQUE et MAGNIFIQUE.\newline
+
+Pour écrire une équation, il est possible de faire du LaTeX directement, par exemple 
+\begin{equation}
+\oiiint \psi\qty(\vb{x},t)\ \dd x.
+\end{equation}
+Mais à l'aide des *sources*, il est possible de mettre le texte en /verbatim/, de sorte que
+#+begin_src latex
+\begin{equation}
+\int \psi\qty(\vb{x},t) \dd x, 
+\end{equation}
+#+end_src
+soit une équation utilisant le fameux package /physics/.
+
+* Org-Mode, cases à cocher, énumérations, listes et raccourcis clavier
+** TODO Ceci est une sous-section avec des cases à cocher avec tag
+   DEADLINE: <2023-03-05 Sun>
+- [ ] Ici on va mettre des petits carrés.
+- [X] Ici on va mettre un sous-carré.
+  - [X] Et un autre sous-carré permettant de comprendre comment ça marche.
+    
+** Fonctionnement des listes et documentation de Org-Mode
+N'hésite pas à te référer à la [[https://orgmode.org/manual/Plain-Lists.html][documentation]] de Org-Mode.
+Elle est vraiment /clean/ et bien ordonnée et il y a des raccourcis qui en valent vraiment la peine.
+
+* Une installation sans pareil                                     :hardcore:
+** Installation du module TexLive
+En premier lieu, il faut s'assurer que LaTeX est installé sur l'ordinateur, généralement avec *TeXLive*.
+Donc,
+#+begin_src bash
+>>> sudo apt install texlive
+#+end_src 
+
+** Installation des modules (/packages/) LaTeX
+Ensuite, il risque de manquer quelques /packages/.
+Pour pallier à ce problème, nous utilisons la commande /tlmgr/.
+Malheureusement, il y a souvent des problèmes d'installation reliés à /tlmgr/, faut pas hésiter à essayer quand même,
+#+begin_src bash 
+>>> tlmgr install physics
+(running on Debian, switching to user mode!)
+(see /usr/share/doc/texlive-base/README.tlmgr-on-Debian.md)
+
+tlmgr: Local TeX Live (2021) is older than remote repository (2022).
+Cross release updates are only supported with
+  update-tlmgr-latest(.sh/.exe) --update
+See https://tug.org/texlive/upgrade.html for details.
+#+end_src
+Bref, ça marche pas.
+La commande 
+#+begin_src bash
+>>> latex --version
+#+end_src
+nous montre que la bonne édition de TexLive est installée (2023). 
+Une recherche rapide sur *les internet* nous enseigne qu'il y a souvent des problèmes de versions entre ce que *TexLive* a installé et *tlmgr* qui est généralement installé en même temps que Ubuntu.
+Même en installant /tlmgr/ avec /apt-get/, on a l'impression que le problème persiste, comme les prochaines commandes nous le démontrerons.
+Regardons la version,
+#+begin_src bash
+>>> tlmgr --version
+tlmgr revision 60693 (2021-10-04 04:24:25 +0200)
+tlmgr using installation: /usr/share/texlive
+TeX Live (https://tug.org/texlive) version 2021
+#+end_src
+
+Bref, justement.
+Supprimons complétement TexLive de notre ordinateur (comme suggéré par un des utilisateurs de [[https://askubuntu.com/questions/989446/removing-texlive-from-ubuntu-16-04-lts-installed-using-terminal-apt-get][Stack Exchange]]) et on réinstalle litérallement tout (TeXLive et tlmgr) avec la commande 
+#+begin_src bash
+>>> sudo apt-get purge texlive-*
+>>> sudo apt-get autoremove
+>>> sudo apt-get autoclean
+%
+>>> sudo apt-get instal texlive-full
+#+end_src
+Si ça ne marche toujours pas -- donc qu'on observe des dépendances non-résolues (/unmet dependencies/) -- on peut utiliser le package [[https://www.baeldung.com/linux/unmet-dependencies-apt-get][aptitude]].
+*Aptitude* est une extension de *apt* qui trouve des solutions à l'installation pour les problèmes dépendance.
+Ça marche généralement bien, comme le confirme plusieurs utilisateurs de *Stack Exchange*. 
+#+begin_src bash
+>>> sudo apt-get update
+>>> sudo apt-get install aptitude
+>>> sudo aptitude install texlive-full
+#+end_src
+Pour confirmer qu'on ne fait pas n'importe quoi, on peut de nouveau essayer de vérifier les versions,
+#+begin_src bash
+>>> latex --version
+pdfTeX 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian)
+kpathsea version 6.3.4/dev
+Copyright 2021 Han The Thanh (pdfTeX) et al.
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the pdfTeX copyright and
+the Lesser GNU General Public License.
+For more information about these matters, see the file
+named COPYING and the pdfTeX source.
+Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.
+Compiled with libpng 1.6.37; using libpng 1.6.37
+Compiled with zlib 1.2.11; using zlib 1.2.11
+Compiled with xpdf version 4.03
+
+>>> tlmgr --version
+tlmgr revision 60693 (2021-10-04 04:24:25 +0200)
+tlmgr using installation: /usr/share/texlive
+TeX Live (https://tug.org/texlive) version 2021
+#+end_src
+Malheureusement, nous avons toujours le même problème de versions, ce qui confirme que le répertoire (/repository/) est complétement détraqué.
+On peut tenter de mettre à jour (/update/) le module *tlmgr* à l'aide de la commande
+#+begin_src bash
+>>> sudo tlmgr update --self --all
+(running on Debian, switching to user mode!)
+(see /usr/share/doc/texlive-base/README.tlmgr-on-Debian.md)
+TLPDB: not a directory, not loading: /root/texmf
+tlmgr: user mode not initialized, please read the documentation!
+#+end_src
+On constate que ça ne marche toujours pas.
+On peut quand même /gosser/ pour trouver où est situé TLPDB.
+Un autre utilisateur de [[https://tex.stackexchange.com/questions/137428/tlmgr-cannot-setup-tlpdb][Stack Exchange]] propose
+#+begin_src bash
+>>> sudo tlmgr init-usertree
+>>> sudo tlmgr update --self --all
+(running on Debian, switching to user mode!)
+(see /usr/share/doc/texlive-base/README.tlmgr-on-Debian.md)
+
+tlmgr: Local TeX Live (2021) is older than remote repository (2022).
+Cross release updates are only supported with
+  update-tlmgr-latest(.sh/.exe) --update
+See https://tug.org/texlive/upgrade.html for details.
+#+end_src
+Bref, peu d'avancement. 
+Au final, impossible de mettre le module à jour, car les versions sont différentes, quelle ironie du sort... \newline
+
+** Solution
+Après une autre heure de recherche, j'ai trouvé la [[https://www.tug.org/texlive/quickinstall.html][solution]] (qui est en fait le lien proposé par /tlmgr/ lui-même).
+
+1. On commence par purger tout ce qui est en lien avec *texlive* (comme on a fait précédemment).
+2. On installe le tar.gz comme proposé sur le site -- Ça devrait prendre un bon 30 minutes d'installation. 
+3. On ajoute quelques chemins à notre *PATH* en ajoutant les lignes
+#+begin_src bash
+# >>> Chemin pour TeXLive et tlmgr >>>
+export PATH="/usr/local/texlive/2022/bin/x86_64-linux:$PATH"
+export MANPATH="/usr/local/texlive/2022/texmf-dist/doc/man:$MANPATH"
+export INFOPATH="/usr/local/texlive/2022/texmf-dist/doc/info:$INFOPATH"
+#+end_src
+à notre fichier /.bashrc/. 
+Bref, *maintenant*, tout devrait être en ordre! \newline
+
+Maintenant, on teste les versions pour être sur, on obtient
+#+begin_src bash
+>>> tlmgr --version
+tlmgr revision 63068 (2022-04-18 07:58:07 +0200)
+tlmgr using installation: /usr/local/texlive/2022
+TeX Live (https://tug.org/texlive) version 2022
+>>> latex --version
+pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2022)
+kpathsea version 6.3.4
+Copyright 2022 Han The Thanh (pdfTeX) et al.
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the pdfTeX copyright and
+the Lesser GNU General Public License.
+For more information about these matters, see the file
+named COPYING and the pdfTeX source.
+Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.
+Compiled with libpng 1.6.37; using libpng 1.6.37
+Compiled with zlib 1.2.11; using zlib 1.2.11
+Compiled with xpdf version 4.03
+#+end_src
+Par la suite, on peut finalement installer les modules (/packages/) nécessaires à l'aide de la commande 
+#+begin_src bash
+>>> sudo $(which tlmgr) install physics
+#+end_src
+
+* Compiler un fichier Org en LaTeX à l'aide de PDFLatex                :Easy:
+** Compilation
+1) *M-X org-export-dispatch* et on gosse dans la section LaTeX, avec les touches nécessaires montrées à l'écran. 
+Par exemple, on devrait avoir exporté un nouveau fichier en *tex*.
+2) Il est aussi possible de dérouler à travers les anciens *M-x* à l'aide de *M-p*.
+3) J'ai oublié...
+
+** Débogage pré-compilation
+Si le fichier /pdf/ ou /tex/ n'apparait pas, un buffer emacs *Org PDF LaTeX Output* devrait déjà être présent sur les lieux du crime. 
+Si ça ne suffit pas, le fichier /tex/ dans le répertoire courant devrait nous renseigner sur les erreurs.
+
+* Org-Cite et compilation LaTeX
+** Déroulement d'une compilation et lien indirect avec les références
+Juste pour se situer dans le schéma narratif de la compilation de fichiers Org-LaTeX :
+
++ Emacs compile le langage /Org/ dans fichier /tex/.
++ Ensuite, le compilateur /pdflatex/ compile le fichier LaTeX en /pdf/.
+
+Donc, lorsqu'on crée une ou des citations à l'aide de la commande *M-x org-cite-insert*, Emacs crée un lien symbolique vers une entrée dans un ficier /.bib/.
+Lors de la compilation en fichier PDF, Emacs exporte le liens dans un formatage compréhensible pour un compilateur LaTeX.
+C'est pourquoi il faut signaler le méthode d'exportation des références et citations à l'aide de la commande
+#+begin_src latex
+#+cite_export: bibtex
+#+end_src
+Dans cet exemple, on dit à Emacs que toutes nos références se transformeront en citations compréhensibles pour le module /biblatex/.
+Personellement, j'ai l'habitude d'utiliser /natbib/, donc je mentionne
+#+begin_src latex
+#+cite_export: natbib
+#+end_src
+Dans mon préambule, je mentionne donc à mon compilateur LaTeX d'utiliser le module /natbib/ de sorte à savoir comment lire les citations exportées par Emacs, justement sous le format de /natbib/ comme désiré, soit
+#+begin_src latex
+/usepackage{natbib}
+#+end_src 
+
+Finalement, /pdflatex/ passe au moins 3 fois sur le texte pour, dans un premier temps :
++ Rammasser les citation et les références,
++ Créer un fichier /bbi/ qui contiendra notre bibliographie
++ Apposer la bibliographie et les liens sur le texte avec les bonnes références.
+  
+C'est d'ailleurs pourquoi on fait mention au nombre de compilations dans le /buffer/ *Org PDF LaTeX Output*.
+
+#+NAME: fig:chat1
+#+CAPTION: Ce magnifique chat fera titre d'exemple.
+#+ATTR_LATEX: :width 0.3\textwidth
+[[file:figures/pexels-photo-4587959.jpeg]]
+
+\newpage
+
+* Formattage des figures en Org-LaTeX
+
+#+NAME: fig:chat2
+#+CAPTION: Ce pauvre chat est enrobé par le texte.
+#+ATTR_LATEX: :float wrap :width 0.36\textwidth :placement [21]{l}{0.38\textwidth} \vspace{-\baselineskip}
+[[file:figures/pexels-photo-4587955.jpeg]]
+
+** Une méthode simpliste pour inclure des figures 
+Il est raisonnablement simple d'ajouter des figures à notre fichier LaTeX en Org-Mode.
+La méthodologie est légèrement différente qu'en compilation LaTeX.
+Sur Overleaf, la complétion de texte rend le travail assez simple.
+Mais en abscence de cette fonctionnalité sur Emacs (en date d'écriture de ce texte), je serai honnêtement prêt à dire que c'est plus simple en Org qu'en LaTeX.
+Pour ajouter une figure, il n'y a qu'à suivre la méthodologie suivante : 
++ On procède de la même manière que pour l'ajout d'un lien symbolique. On appuie donc sur les touches *Ctrl-x Ctrl-l*.
++ Ensuite, on entre la commande « /file/ » pour mentionner qu'on recherche un fichier et on appuie sur *Ret*.
++ Le mini-buffer nous permet ensuite de choisir un fichier quelconque. Il faut juste s'assurer de ne pas entrer de description à ce lien symbolique.
++ Une fois achevé, en Org-Mode, on devrait voir notre fichier entre doubles crochets.
+
+Par la suite, il est extrêmement pertinent de : 
++ Nommer notre figure à l'aide de la notation Org,
++ Ajouter une descrition à notre figure,
++ De dicter la taille de la figure, du même usage qu'on ferait dans un compilateur LaTeX.
+Le tout devrait s'harmoniser dans un arrangement de quatres courtes lignes; une victoire en comparaison de tous les environnements LaTeX qu'il aurait fallu appeler, soit
+
+#+begin_src latex
+#+NAME: fig:chat1
+#+CAPTION: Ce magnifique chat fera titre d'exemple.
+#+ATTR_LATEX: :width 0.4\textwidth
+[[file:figures/pexels-photo-4587959.jpeg]]
+#+end_src
+
+Le résultat direct de l'exécution des lignes précédentes par le compilateur LaTeX devrait se retrouver à la figure précédent le début de cette section. 
+Dinalement, à l'aide de la variable NAME, il est facile de créer une référence direct à cette image (voir figure [[fig:chat1]]).
+
+** Envelopper une figure dans du texte
+Il est assez simple Il est possible de faire des /wrapfig/ en Org-Mode aussi (Voir [[https://orgmode.org/manual/Images-in-LaTeX-export.html][documentation]]).
+Pour réaliser cette action, on suit la précédente méthodologie, mais on se permet de jouer sur les attribus LaTeX, comme illustré à la figure [[fig:chat2]].
+
+#+begin_src latex
+#+NAME: fig:chat2
+#+CAPTION: Ce pauvre chat est enrobé par le texte.
+#+ATTR_LATEX: :float wrap :width 0.37\textwidth :placement [20]{r}{0.38\textwidth} \vspace{-\baselineskip}
+[[file:figures/pexels-photo-4587955.jpeg]]
+#+end_src
+
+Observons le placement des attribus que nous avons ajouté à la figure [[fig:chat2]], soit
+#+begin_src latex
+  #+ATTR_LATEX: :width 0.23\textwidth :float wrap :placement {r}{0.25\textwidth} \vspace{-\baselineskip}
+#+end_src 
+La commande /vspace/ est utilisée pour *mettre à niveau* notre figure en relation avec le début du paragraphe et la commande /baselineskip/ est associée à la distance (Voir [[https://tex.stackexchange.com/questions/552859/wrapfigure-how-to-line-up-text-with-the-figure-at-the-top][StackOverflow]]).
+Comme la commande est ajoutée à droite du /ATTR-LATEX/, cette dernière sera ajouté à l'intérieur de l'environnement /figure/ dans notre fichier LaTeX, comme en font état les lignes suivantes :
+#+begin_src latex
+\begin{wrapfigure}[12]{r}{0.25\textwidth} \vspace{-\baselineskip}
+\centering
+\includegraphics[width=0.23\textwidth]{figures/pexels-photo-4587955.jpeg}
+\caption{\label{fig:orgb0e0af3}Ce pauvre chat est enrobé par le texte.}
+\end{wrapfigure}
+#+end_src
+
+** Erreurs fréquentes sur le positionnement des figures
+Pour optimiser le placement des figures -- surtout lorsqu'elles sont enveloppées par du texte, il est fortement conseillé de *ne jamais utiliser la commande*
+#+begin_src latex
+  \\
+#+end_src
+Car c'est une commande de type « caméléon » qui tente au mieux de s'adapter à n'importe quelle situation (texmode, mathmode, etc.).
+Cette dernière est donc redéfinit dans beaucoup de modules et à toutes les sauces et son [[https://tex.stackexchange.com/questions/82664/when-to-use-par-and-when-newline-or-blank-lines/82666#82666][utilisation]] induit des erreurs de type
+#+begin_src latex
+  [2] Underfull \hbox (badness 10000) in paragraph at lines 258--260
+#+end_src
+qui se résument par une justification forcée du texte, ce qui est esthétiquement catastrophique.
+Il est donc préférable de toujours utiliser les commandes
+#+begin_src latex
+  \newline
+  \bigskip
+#+end_src
+pour séparer des paragraphes.

@@ -1,0 +1,458 @@
+% Created 2023-04-15 Sat 16:54
+% Intended LaTeX compiler: pdflatex
+
+% =================================BASE====================================%
+\documentclass[8pt]{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry} % Marges
+\usepackage[utf8]{inputenc} % Important pour symboles Francophones, é,à,etc.
+\usepackage[T1]{fontenc} % Nécessaire avec FrenchBabel
+\usepackage{lmodern}
+
+\usepackage{natbib} % Bibliographie
+\bibliographystyle{abbrvnat}
+
+
+
+\usepackage{amsmath, amssymb, amsthm} % Symb. math. (Mathmode+Textmode) + Beaux théorèmes.
+
+\usepackage{mathtools, cancel} % Utilisation de boîtes \boxed{} + \cancelto{}{}
+\usepackage{graphicx, wrapfig} % Géstion des figures.
+\usepackage{hyperref} % Permettre l'utilisation d'hyperliens.
+\usepackage{color} % Permettre l'utilisation des couleurs.
+\usepackage[dvipsnames]{xcolor} % Couleurs avancées.
+\usepackage{titling} % Donne accès à \theauthor, \thetitle, \thedate
+
+% >>> Physique >>>
+\usepackage{physics} % Meilleur package pour physicien. 
+\usepackage{pxfonts} % Rajoute PLEIN de symboles mathématiques, dont les intégrales doubles et triples
+% <<< Physique <<<
+
+\usepackage{lipsum} % For fun
+\usepackage{tikz} % Realisation de figures TIKZ.
+\usepackage{empheq} % Boite autour de MULTIPLE équations
+
+\usepackage[french, american]{babel} % Environnements en Français.
+% ==============================BASE-(END)=================================%
+
+
+
+% ================================SETTINGS=================================%
+%%% - Pas d'indentation en début de paragraphe :
+\setlength\parindent{0pt} 
+%%% - Couleurs de hyperliens :
+\hypersetup{colorlinks,urlcolor=BlueViolet,citecolor=BlueViolet,linkcolor=BlueViolet}
+%%% - Numéros d'équations suivent les sections :
+\numberwithin{equation}{section} 
+%%% - Les « captions » sont en italique :
+\usepackage[textfont = it]{caption} 
+% ================================SETTINGS=================================%
+
+
+
+% ==============================NEWCOMMANDS================================%
+% Degrés Celsius :
+\newcommand{\celsius}{${}^\circ$ C} % \degrée Celsius : Pas mal plus simple qu'utilise le package gensymb qui plante avec tout...
+
+% Vecteurs de base :
+\newcommand{\nvf}{\hat{\vb{n}}}
+\newcommand{\ivf}{\vb{\hat{i}}}
+\newcommand{\jvf}{\hat{\vb{j}}}
+\newcommand{\kvf}{\hat{\vb{k}}}
+
+% Boîte vide pour ajuster les underbrace
+\newcommand{\bigno}{\vphantom{\qty(\frac{d}{q})}}
+
+% Tilde over psi
+\newcommand{\tpsi}{\tilde{\psi}}
+% ==============================NEWCOMMANDS================================%
+
+
+
+% ==============================PAGE-TITRE=================================%
+% Titlepage 
+\newcommand{\mytitlepage}{
+\begin{titlepage}
+\begin{center}
+{\Large Contrat Été 2023 \par}
+\vspace{2cm}
+{\Large \MakeUppercase{\thetitle} \par}
+\vspace{2cm}
+RÉALISÉ DANS LE CADRE\\ D'UN PROJET POUR \par
+\vspace{2cm}
+{\Large ISMER--UQAR \par}
+\vspace{2cm}
+{\thedate}
+\end{center}
+\vfill
+Rédaction \\
+\theauthor\\
+\url{charles-edouard.lizotte@uqar.ca}\\
+ISMER-UQAR
+\end{titlepage}
+}
+% ==============================PAGE-TITRE=================================%
+
+
+
+% =================================ENTÊTE==================================%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{13pt}
+\renewcommand{\headrulewidth}{1.3pt} % Ligne horizontale en haut
+
+\fancyhead[R]{\textit{\thetitle}}
+\fancyhead[L]{\ \thepage}
+\fancyfoot[R]{\theauthor}
+\fancyfoot[L]{}
+\fancyfoot[C]{} 
+% =================================ENTÊTE==================================%
+\author{Charles-Édouard Lizotte}
+\date{\textit{<2023-03-07 Tue>}}
+\title{Org-Mode et \LaTeX{} -- Instructions et débogage}
+\hypersetup{
+ pdfauthor={Charles-Édouard Lizotte},
+ pdftitle={Org-Mode et \LaTeX{} -- Instructions et débogage},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.6.2)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Écrire des équations et ajouter un soupçon de \textbf{verbatim} dans nos vie}
+\label{sec:orgfa69a68}
+On peut écrire un peu n'importe quoi. C'est pas très grave au fond. Un petit truc pour gérer les invite de commande. :
+\begin{verbatim}
+M-x comint-clear-buffer
+\end{verbatim}
+permet de tout effacer d'un coup. MAGIQUE et MAGNIFIQUE.\newline
+
+Pour écrire une équation, il est possible de faire du \LaTeX{} directement, par exemple 
+\begin{equation}
+\oiiint \psi\qty(\vb{x},t)\ \dd x.
+\end{equation}
+Mais à l'aide des \textbf{sources}, il est possible de mettre le texte en \emph{verbatim}, de sorte que
+\begin{verbatim}
+\begin{equation}
+\int \psi\qty(\vb{x},t) \dd x, 
+\end{equation}
+\end{verbatim}
+soit une équation utilisant le fameux package \emph{physics}.
+
+\section{Org-Mode, cases à cocher, énumérations, listes et raccourcis clavier}
+\label{sec:org21ce7c2}
+\subsection{{\bfseries\sffamily TODO} Ceci est une sous-section avec des cases à cocher avec tag}
+\label{sec:orgb7c3309}
+\begin{itemize}
+\item[{$\square$}] Ici on va mettre des petits carrés.
+\item[{$\boxtimes$}] Ici on va mettre un sous-carré.
+\begin{itemize}
+\item[{$\boxtimes$}] Et un autre sous-carré permettant de comprendre comment ça marche.
+\end{itemize}
+\end{itemize}
+
+\subsection{Fonctionnement des listes et documentation de Org-Mode}
+\label{sec:orgf7b39e8}
+N'hésite pas à te référer à la \href{https://orgmode.org/manual/Plain-Lists.html}{documentation} de Org-Mode.
+Elle est vraiment \emph{clean} et bien ordonnée et il y a des raccourcis qui en valent vraiment la peine.
+
+\section{Une installation sans pareil\hfill{}\textsc{hardcore}}
+\label{sec:orge0592b8}
+\subsection{Installation du module TexLive}
+\label{sec:orgdb7baf3}
+En premier lieu, il faut s'assurer que \LaTeX{} est installé sur l'ordinateur, généralement avec \textbf{TeXLive}.
+Donc,
+\begin{verbatim}
+>>> sudo apt install texlive
+\end{verbatim}
+
+\subsection{Installation des modules (\emph{packages}) \LaTeX{}}
+\label{sec:org05aede9}
+Ensuite, il risque de manquer quelques \emph{packages}.
+Pour pallier à ce problème, nous utilisons la commande \emph{tlmgr}.
+Malheureusement, il y a souvent des problèmes d'installation reliés à \emph{tlmgr}, faut pas hésiter à essayer quand même,
+\begin{verbatim}
+>>> tlmgr install physics
+(running on Debian, switching to user mode!)
+(see /usr/share/doc/texlive-base/README.tlmgr-on-Debian.md)
+
+tlmgr: Local TeX Live (2021) is older than remote repository (2022).
+Cross release updates are only supported with
+  update-tlmgr-latest(.sh/.exe) --update
+See https://tug.org/texlive/upgrade.html for details.
+\end{verbatim}
+Bref, ça marche pas.
+La commande 
+\begin{verbatim}
+>>> latex --version
+\end{verbatim}
+nous montre que la bonne édition de TexLive est installée (2023). 
+Une recherche rapide sur \textbf{les internet} nous enseigne qu'il y a souvent des problèmes de versions entre ce que \textbf{TexLive} a installé et \textbf{tlmgr} qui est généralement installé en même temps que Ubuntu.
+Même en installant \emph{tlmgr} avec \emph{apt-get}, on a l'impression que le problème persiste, comme les prochaines commandes nous le démontrerons.
+Regardons la version,
+\begin{verbatim}
+>>> tlmgr --version
+tlmgr revision 60693 (2021-10-04 04:24:25 +0200)
+tlmgr using installation: /usr/share/texlive
+TeX Live (https://tug.org/texlive) version 2021
+\end{verbatim}
+
+Bref, justement.
+Supprimons complétement TexLive de notre ordinateur (comme suggéré par un des utilisateurs de \href{https://askubuntu.com/questions/989446/removing-texlive-from-ubuntu-16-04-lts-installed-using-terminal-apt-get}{Stack Exchange}) et on réinstalle litérallement tout (TeXLive et tlmgr) avec la commande 
+\begin{verbatim}
+>>> sudo apt-get purge texlive-*
+>>> sudo apt-get autoremove
+>>> sudo apt-get autoclean
+%
+>>> sudo apt-get instal texlive-full
+\end{verbatim}
+Si ça ne marche toujours pas -- donc qu'on observe des dépendances non-résolues (\emph{unmet dependencies}) -- on peut utiliser le package \href{https://www.baeldung.com/linux/unmet-dependencies-apt-get}{aptitude}.
+\textbf{Aptitude} est une extension de \textbf{apt} qui trouve des solutions à l'installation pour les problèmes dépendance.
+Ça marche généralement bien, comme le confirme plusieurs utilisateurs de \textbf{Stack Exchange}. 
+\begin{verbatim}
+>>> sudo apt-get update
+>>> sudo apt-get install aptitude
+>>> sudo aptitude install texlive-full
+\end{verbatim}
+Pour confirmer qu'on ne fait pas n'importe quoi, on peut de nouveau essayer de vérifier les versions,
+\begin{verbatim}
+>>> latex --version
+pdfTeX 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian)
+kpathsea version 6.3.4/dev
+Copyright 2021 Han The Thanh (pdfTeX) et al.
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the pdfTeX copyright and
+the Lesser GNU General Public License.
+For more information about these matters, see the file
+named COPYING and the pdfTeX source.
+Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.
+Compiled with libpng 1.6.37; using libpng 1.6.37
+Compiled with zlib 1.2.11; using zlib 1.2.11
+Compiled with xpdf version 4.03
+
+>>> tlmgr --version
+tlmgr revision 60693 (2021-10-04 04:24:25 +0200)
+tlmgr using installation: /usr/share/texlive
+TeX Live (https://tug.org/texlive) version 2021
+\end{verbatim}
+Malheureusement, nous avons toujours le même problème de versions, ce qui confirme que le répertoire (\emph{repository}) est complétement détraqué.
+On peut tenter de mettre à jour (\emph{update}) le module \textbf{tlmgr} à l'aide de la commande
+\begin{verbatim}
+>>> sudo tlmgr update --self --all
+(running on Debian, switching to user mode!)
+(see /usr/share/doc/texlive-base/README.tlmgr-on-Debian.md)
+TLPDB: not a directory, not loading: /root/texmf
+tlmgr: user mode not initialized, please read the documentation!
+\end{verbatim}
+On constate que ça ne marche toujours pas.
+On peut quand même \emph{gosser} pour trouver où est situé TLPDB.
+Un autre utilisateur de \href{https://tex.stackexchange.com/questions/137428/tlmgr-cannot-setup-tlpdb}{Stack Exchange} propose
+\begin{verbatim}
+>>> sudo tlmgr init-usertree
+>>> sudo tlmgr update --self --all
+(running on Debian, switching to user mode!)
+(see /usr/share/doc/texlive-base/README.tlmgr-on-Debian.md)
+
+tlmgr: Local TeX Live (2021) is older than remote repository (2022).
+Cross release updates are only supported with
+  update-tlmgr-latest(.sh/.exe) --update
+See https://tug.org/texlive/upgrade.html for details.
+\end{verbatim}
+Bref, peu d'avancement. 
+Au final, impossible de mettre le module à jour, car les versions sont différentes, quelle ironie du sort\ldots{} \newline
+
+\subsection{Solution}
+\label{sec:org9d84f6b}
+Après une autre heure de recherche, j'ai trouvé la \href{https://www.tug.org/texlive/quickinstall.html}{solution} (qui est en fait le lien proposé par \emph{tlmgr} lui-même).
+
+\begin{enumerate}
+\item On commence par purger tout ce qui est en lien avec \textbf{texlive} (comme on a fait précédemment).
+\item On installe le tar.gz comme proposé sur le site -- Ça devrait prendre un bon 30 minutes d'installation.
+\item On ajoute quelques chemins à notre \textbf{PATH} en ajoutant les lignes
+\end{enumerate}
+\begin{verbatim}
+# >>> Chemin pour TeXLive et tlmgr >>>
+export PATH="/usr/local/texlive/2022/bin/x86_64-linux:$PATH"
+export MANPATH="/usr/local/texlive/2022/texmf-dist/doc/man:$MANPATH"
+export INFOPATH="/usr/local/texlive/2022/texmf-dist/doc/info:$INFOPATH"
+\end{verbatim}
+à notre fichier \emph{.bashrc}. 
+Bref, \textbf{maintenant}, tout devrait être en ordre! \newline
+
+Maintenant, on teste les versions pour être sur, on obtient
+\begin{verbatim}
+>>> tlmgr --version
+tlmgr revision 63068 (2022-04-18 07:58:07 +0200)
+tlmgr using installation: /usr/local/texlive/2022
+TeX Live (https://tug.org/texlive) version 2022
+>>> latex --version
+pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2022)
+kpathsea version 6.3.4
+Copyright 2022 Han The Thanh (pdfTeX) et al.
+There is NO warranty.  Redistribution of this software is
+covered by the terms of both the pdfTeX copyright and
+the Lesser GNU General Public License.
+For more information about these matters, see the file
+named COPYING and the pdfTeX source.
+Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.
+Compiled with libpng 1.6.37; using libpng 1.6.37
+Compiled with zlib 1.2.11; using zlib 1.2.11
+Compiled with xpdf version 4.03
+\end{verbatim}
+Par la suite, on peut finalement installer les modules (\emph{packages}) nécessaires à l'aide de la commande 
+\begin{verbatim}
+>>> sudo $(which tlmgr) install physics
+\end{verbatim}
+
+\section{Compiler un fichier Org en \LaTeX{} à l'aide de PDFLatex\hfill{}\textsc{Easy}}
+\label{sec:orgbfb9097}
+\subsection{Compilation}
+\label{sec:org35cf9ac}
+\begin{enumerate}
+\item \textbf{M-X org-export-dispatch} et on gosse dans la section \LaTeX{}, avec les touches nécessaires montrées à l'écran.
+\end{enumerate}
+Par exemple, on devrait avoir exporté un nouveau fichier en \textbf{tex}.
+\begin{enumerate}
+\item Il est aussi possible de dérouler à travers les anciens \textbf{M-x} à l'aide de \textbf{M-p}.
+\item J'ai oublié\ldots{}
+\end{enumerate}
+
+\subsection{Débogage pré-compilation}
+\label{sec:org2f94352}
+Si le fichier \emph{pdf} ou \emph{tex} n'apparait pas, un buffer emacs \textbf{Org PDF \LaTeX{} Output} devrait déjà être présent sur les lieux du crime. 
+Si ça ne suffit pas, le fichier \emph{tex} dans le répertoire courant devrait nous renseigner sur les erreurs.
+
+\section{Org-Cite et compilation \LaTeX{}}
+\label{sec:orgdb0b60e}
+\subsection{Déroulement d'une compilation et lien indirect avec les références}
+\label{sec:orga6f3bf2}
+Juste pour se situer dans le schéma narratif de la compilation de fichiers Org-\LaTeX{} :
+
+\begin{itemize}
+\item Emacs compile le langage \emph{Org} dans fichier \emph{tex}.
+\item Ensuite, le compilateur \emph{pdflatex} compile le fichier \LaTeX{} en \emph{pdf}.
+\end{itemize}
+
+Donc, lorsqu'on crée une ou des citations à l'aide de la commande \textbf{M-x org-cite-insert}, Emacs crée un lien symbolique vers une entrée dans un ficier \emph{.bib}.
+Lors de la compilation en fichier PDF, Emacs exporte le liens dans un formatage compréhensible pour un compilateur \LaTeX{}.
+C'est pourquoi il faut signaler le méthode d'exportation des références et citations à l'aide de la commande
+\begin{verbatim}
+#+cite_export: bibtex
+\end{verbatim}
+Dans cet exemple, on dit à Emacs que toutes nos références se transformeront en citations compréhensibles pour le module \emph{biblatex}.
+Personellement, j'ai l'habitude d'utiliser \emph{natbib}, donc je mentionne
+\begin{verbatim}
+#+cite_export: natbib
+\end{verbatim}
+Dans mon préambule, je mentionne donc à mon compilateur \LaTeX{} d'utiliser le module \emph{natbib} de sorte à savoir comment lire les citations exportées par Emacs, justement sous le format de \emph{natbib} comme désiré, soit
+\begin{verbatim}
+/usepackage{natbib}
+\end{verbatim}
+
+Finalement, \emph{pdflatex} passe au moins 3 fois sur le texte pour, dans un premier temps :
+\begin{itemize}
+\item Rammasser les citation et les références,
+\item Créer un fichier \emph{bbi} qui contiendra notre bibliographie
+\item Apposer la bibliographie et les liens sur le texte avec les bonnes références.
+\end{itemize}
+
+C'est d'ailleurs pourquoi on fait mention au nombre de compilations dans le \emph{buffer} \textbf{Org PDF \LaTeX{} Output}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.3\textwidth]{figures/pexels-photo-4587959.jpeg}
+\caption{\label{fig:org6f5f22f}Ce magnifique chat fera titre d'exemple.}
+\end{figure}
+
+\newpage
+
+\section{Formattage des figures en Org-\LaTeX{}}
+\label{sec:org7a18586}
+
+\begin{wrapfigure}[21]{l}{0.38\textwidth} \vspace{-\baselineskip}
+\centering
+\includegraphics[width=0.36\textwidth]{figures/pexels-photo-4587955.jpeg}
+\caption{\label{fig:orgbe65fbd}Ce pauvre chat est enrobé par le texte.}
+\end{wrapfigure}
+
+\subsection{Une méthode simpliste pour inclure des figures}
+\label{sec:org16ff508}
+Il est raisonnablement simple d'ajouter des figures à notre fichier \LaTeX{} en Org-Mode.
+La méthodologie est légèrement différente qu'en compilation \LaTeX{}.
+Sur Overleaf, la complétion de texte rend le travail assez simple.
+Mais en abscence de cette fonctionnalité sur Emacs (en date d'écriture de ce texte), je serai honnêtement prêt à dire que c'est plus simple en Org qu'en \LaTeX{}.
+Pour ajouter une figure, il n'y a qu'à suivre la méthodologie suivante : 
+\begin{itemize}
+\item On procède de la même manière que pour l'ajout d'un lien symbolique. On appuie donc sur les touches \textbf{Ctrl-x Ctrl-l}.
+\item Ensuite, on entre la commande « \emph{file} » pour mentionner qu'on recherche un fichier et on appuie sur \textbf{Ret}.
+\item Le mini-buffer nous permet ensuite de choisir un fichier quelconque. Il faut juste s'assurer de ne pas entrer de description à ce lien symbolique.
+\item Une fois achevé, en Org-Mode, on devrait voir notre fichier entre doubles crochets.
+\end{itemize}
+
+Par la suite, il est extrêmement pertinent de : 
+\begin{itemize}
+\item Nommer notre figure à l'aide de la notation Org,
+\item Ajouter une descrition à notre figure,
+\item De dicter la taille de la figure, du même usage qu'on ferait dans un compilateur \LaTeX{}.
+\end{itemize}
+Le tout devrait s'harmoniser dans un arrangement de quatres courtes lignes; une victoire en comparaison de tous les environnements \LaTeX{} qu'il aurait fallu appeler, soit
+
+\begin{verbatim}
+#+NAME: fig:chat1
+#+CAPTION: Ce magnifique chat fera titre d'exemple.
+#+ATTR_LATEX: :width 0.4\textwidth
+[[file:figures/pexels-photo-4587959.jpeg]]
+\end{verbatim}
+
+Le résultat direct de l'exécution des lignes précédentes par le compilateur \LaTeX{} devrait se retrouver à la figure précédent le début de cette section. 
+Dinalement, à l'aide de la variable NAME, il est facile de créer une référence direct à cette image (voir figure \ref{fig:org6f5f22f}).
+
+\subsection{Envelopper une figure dans du texte}
+\label{sec:orgc3a4734}
+Il est assez simple Il est possible de faire des \emph{wrapfig} en Org-Mode aussi (Voir \href{https://orgmode.org/manual/Images-in-LaTeX-export.html}{documentation}).
+Pour réaliser cette action, on suit la précédente méthodologie, mais on se permet de jouer sur les attribus \LaTeX{}, comme illustré à la figure \ref{fig:orgbe65fbd}.
+
+\begin{verbatim}
+#+NAME: fig:chat2
+#+CAPTION: Ce pauvre chat est enrobé par le texte.
+#+ATTR_LATEX: :float wrap :width 0.37\textwidth :placement [20]{r}{0.38\textwidth} \vspace{-\baselineskip}
+[[file:figures/pexels-photo-4587955.jpeg]]
+\end{verbatim}
+
+Observons le placement des attribus que nous avons ajouté à la figure \ref{fig:orgbe65fbd}, soit
+\begin{verbatim}
+#+ATTR_LATEX: :width 0.23\textwidth :float wrap :placement {r}{0.25\textwidth} \vspace{-\baselineskip}
+\end{verbatim}
+La commande \emph{vspace} est utilisée pour \textbf{mettre à niveau} notre figure en relation avec le début du paragraphe et la commande \emph{baselineskip} est associée à la distance (Voir \href{https://tex.stackexchange.com/questions/552859/wrapfigure-how-to-line-up-text-with-the-figure-at-the-top}{StackOverflow}).
+Comme la commande est ajoutée à droite du \emph{ATTR-LATEX}, cette dernière sera ajouté à l'intérieur de l'environnement \emph{figure} dans notre fichier \LaTeX{}, comme en font état les lignes suivantes :
+\begin{verbatim}
+\begin{wrapfigure}[12]{r}{0.25\textwidth} \vspace{-\baselineskip}
+\centering
+\includegraphics[width=0.23\textwidth]{figures/pexels-photo-4587955.jpeg}
+\caption{\label{fig:orgb0e0af3}Ce pauvre chat est enrobé par le texte.}
+\end{wrapfigure}
+\end{verbatim}
+
+\subsection{Erreurs fréquentes sur le positionnement des figures}
+\label{sec:orgef1e367}
+Pour optimiser le placement des figures -- surtout lorsqu'elles sont enveloppées par du texte, il est fortement conseillé de \textbf{ne jamais utiliser la commande}
+\begin{verbatim}
+\\
+\end{verbatim}
+Car c'est une commande de type « caméléon » qui tente au mieux de s'adapter à n'importe quelle situation (texmode, mathmode, etc.).
+Cette dernière est donc redéfinit dans beaucoup de modules et à toutes les sauces et son \href{https://tex.stackexchange.com/questions/82664/when-to-use-par-and-when-newline-or-blank-lines/82666\#82666}{utilisation} induit des erreurs de type
+\begin{verbatim}
+[2] Underfull \hbox (badness 10000) in paragraph at lines 258--260
+\end{verbatim}
+qui se résument par une justification forcée du texte, ce qui est esthétiquement catastrophique.
+Il est donc préférable de toujours utiliser les commandes
+\begin{verbatim}
+\newline
+\bigskip
+\end{verbatim}
+pour séparer des paragraphes.
+\end{document}

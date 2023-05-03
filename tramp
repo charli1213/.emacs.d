@@ -1,0 +1,31 @@
+;; -*- emacs-lisp -*- <23/03/13 16:36:35 /home/charles-edouard/.emacs.d/tramp>
+;; Tramp connection history.  Don't change this file.
+;; Run `M-x tramp-cleanup-all-connections' instead.
+
+(((tramp-file-name "ssh" "lizoch01" nil "calculs.uqar.ca" nil nil nil)
+  ("uname" "Linux 4.18.0-425.3.1.el8.x86_64")
+  ("locale" "LC_ALL=en_US.utf8")
+  ("test" "test")
+  ("remote-path"
+   ("/usr/bin" "/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
+  ("pipe-buf" 4096)
+  ("remote-shell" "/bin/sh")
+  ("~" "/home/lizoch01")
+  ("file-exists" "test -e")
+  ("case-insensitive" nil)
+  ("readlink" "\\readlink")
+  ("stat" "env QUOTING_STYLE=locale \\stat")
+  ("id" "/usr/bin/id")
+  ("gid-integer" 2053)
+  ("gid-string" "lizoch01")
+  ("ls" "/usr/bin/ls --color=never")
+  ("ls--quoting-style=literal --show-control-chars" "--quoting-style=literal --show-control-chars")
+  ("ls--dired" "--dired")
+  ("df-blocksize" 1)
+  ("df" "\\df --block-size=1 --output=size,used,avail")
+  ("perl-file-spec" t)
+  ("perl-cwd-realpath" t)
+  ("perl" "\\perl")
+  ("git" "\\git"))
+ ((tramp-file-name "ssh" "celiz2" nil "mingan.uqar.ca" nil nil nil)
+  nil))

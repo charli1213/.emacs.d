@@ -1,0 +1,42 @@
+#+Title: Tutoriel du langage Lisp
+#+author: Charles-Édouard Lizotte
+#+date: <2023-03-07 Tue>
+#+latex_class: org-report
+
+
+* Terminologie du langage /lisp/
+
+
+
+** Avant propos 
+Comme nous le verrons dans les sections suivantes, le langage de programmation /lisp/ est bien différent du langage, tels Python, Fortran, etc.
+Ceci vient probablement du fait que tout est une liste, d'où le nom un peu spécial, /lisp/.
+Pour évaluer une ligne de code en /emacs-lisp/, on fait tout simplement *Ctrl+X + Ctrl+E* à *la fin de la ligne* (très important sinon ça bug).
+
+** Nommer les variables
+Commençons par attribuer une valeur à une variable en /lisp/, à l'aide de l'expression
+#+begin_src emacs-lisp
+(setq VARNAME valeur)
+#+end_src
+
+L'opération *setq* associe le symbole *VARNAME* à l'objet *value*.
+Par exemple, 
+#+begin_src emacs-lisp
+(setq xyz 12)
+(print xyz)
+#+end_src
+et on évalue avec **Ctrl+X + Ctrl+E**.
+
+** Fonctions
+Pour définir une fonction, on fait de nouveau une liste, de sorte que 
+#+begin_src emacs-lisp
+(defun fonction (arg)
+(interactive)
+(print arg))
+#+end_src
+
+#+begin_src emacs-lisp
+balbalba
+#+end_src
+
+** Nomenclature des listes
