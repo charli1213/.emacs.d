@@ -1,8 +1,10 @@
+;;(setq current-directory default-directory)
+
 ;; S'assurer que MELPA fonctionne et que la fonction use-package existe
+(package-initialize)
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-install 'use-package)
-(package-initialize)
 ;; M-x package-install
 ;; Doc : https://melpa.org/#/getting-started
 
@@ -51,7 +53,7 @@
 ;; >> Org-Latex-Classes : On crée la variable org-latex-classes (variable vide)
 (setq org-latex-classes nil)
 ;; On load les org-latex-classes en fichier-template emacs-lisp (Autant qu'on veut).
-(load "/home/charles-edouard/.emacs.d/org-latex-templates/template-rapport.el")
+(load "~/.emacs.d/org-latex-templates/template-rapport.el")
 
 ;; >> Esthetique-Org :
 ;; > Indentation activée à l'ouverture d'un fichier org. Ça améliore grandement la lecture du fichier.
