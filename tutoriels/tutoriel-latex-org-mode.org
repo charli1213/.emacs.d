@@ -4,41 +4,47 @@
 #+Latex_CLASS: org-report
 #+cite_export: natbib
 
+* Introduction
+Comme mentionné dans le [[file:tutoriel-org-mode.org][tutoriel précédent]], Org est avant tout un langage construit pour structurer et formatter le texte.
+C'est pourquoi il est possible de l'exporter en langage LaTeX.
+De plus, comme nous faisons tout dans Emacs, il est possible d'utiliser notre fichier /init.el/ pour créer des gabarits et des préambules pour bien formatter les fichier PDF qui sortira à la fin.
+C'est là que ça commence à devenir intéressant.
 
-* Écrire des équations et ajouter un soupçon de *verbatim* dans nos vie
-On peut écrire un peu n'importe quoi. C'est pas très grave au fond. Un petit truc pour gérer les invite de commande. :
-#+begin_src emacs-lisp
-M-x comint-clear-buffer
-#+end_src
-permet de tout effacer d'un coup. MAGIQUE et MAGNIFIQUE.\newline
-
-Pour écrire une équation, il est possible de faire du LaTeX directement, par exemple 
+* Équations et verbatim
+Concrétement, lorsqu'on exporte un fichier Org en LateX, on transforme les commandes Org en commandes LaTeX.
+Par contre, les équations ne sont tout simplement pas formattés, ce qui veut dire qu'on peut écrire certaines commandes LaTeX comme dans un fichier LaTeX.
+Par exemple,
 \begin{equation}
 \oiiint \psi\qty(\vb{x},t)\ \dd x.
 \end{equation}
-Mais à l'aide des *sources*, il est possible de mettre le texte en /verbatim/, de sorte que
+Tandis qu'à l'aide des *sources*, il est possible de mettre le texte en /verbatim/, de sorte que la même équation s'écrit
 #+begin_src latex
 \begin{equation}
-\int \psi\qty(\vb{x},t) \dd x, 
+\int \psi\qty(\vb{x},t) \dd x.
 \end{equation}
 #+end_src
-soit une équation utilisant le fameux package /physics/.
 
-* Org-Mode, cases à cocher, énumérations, listes et raccourcis clavier
-** TODO Ceci est une sous-section avec des cases à cocher avec tag
-   DEADLINE: <2023-03-05 Sun>
-- [ ] Ici on va mettre des petits carrés.
-- [X] Ici on va mettre un sous-carré.
-  - [X] Et un autre sous-carré permettant de comprendre comment ça marche.
-    
-** Fonctionnement des listes et documentation de Org-Mode
-N'hésite pas à te référer à la [[https://orgmode.org/manual/Plain-Lists.html][documentation]] de Org-Mode.
-Elle est vraiment /clean/ et bien ordonnée et il y a des raccourcis qui en valent vraiment la peine.
+On peut écrire pas mal n'importe quoi si l'on sait bien utiliser la commande *source*.
+Par exemple, la commande 
+#+begin_src emacs-lisp
+M-x comint-clear-buffer
+#+end_src
+permet de tout effacer d'un coup.
 
-* Une installation sans pareil                                     :hardcore:
-** Installation du module TexLive
-En premier lieu, il faut s'assurer que LaTeX est installé sur l'ordinateur, généralement avec *TeXLive*.
+
+* Installation et débuggage
+Cette section sert avant tout à s'assurer qu'on peut utiliser le formattage Org pour créer des fichiers LaTeX.
+On y décrit donc les étapes parcourues pour faire fonctionner l'installation, ainsi que des commentaires pertinents. 
+
+** Installation de la distribution TexLive
+TexLive est une distribution libre qui s'occupe d'organiser les fameux /packages/ LaTeX.
+Bref, cette distribution s'assure que les /packages/ sont disponibles pour que la compilation par PDFLatex soit réussie.
+En premier lieux, on peut s'assurer que LaTeX est installé sur l'ordinateur, généralement avec *TeXLive*.
 Donc,
+#+begin_src bash
+  >>> latex --version
+#+end_src
+Si c'est pas installé, on l'installe avec la commande
 #+begin_src bash
 >>> sudo apt install texlive
 #+end_src 
@@ -177,12 +183,20 @@ Par la suite, on peut finalement installer les modules (/packages/) nécessaires
 >>> sudo $(which tlmgr) install physics
 #+end_src
 
-* Compiler un fichier Org en LaTeX à l'aide de PDFLatex                :Easy:
+** Installation sous Fedora
+Nous avons eu le même problème avec Fedora à McGill, la solution proposée était de les installer directement à l'aide de la commande dnf
+#+begin_src bash
+  >>> dnf search physics
+  >>> dnf install texlive-physics
+#+end_src
+
+DNF est l'installateur des distributions RedHat.
+Pour l'installation des /packages/, il est donc possible de passer par le /repo/ de Fedora, tandis qu'un installateur comme /tlmgr/ passe par ses propres /repo/, sur le serveur de TexLive.
+
+* Compiler un fichier Org en LaTeX à l'aide de PDFLatex
 ** Compilation
-1) *M-X org-export-dispatch* et on gosse dans la section LaTeX, avec les touches nécessaires montrées à l'écran. 
+*M-X org-export-dispatch* et on gosse dans la section LaTeX, avec les touches nécessaires montrées à l'écran. 
 Par exemple, on devrait avoir exporté un nouveau fichier en *tex*.
-2) Il est aussi possible de dérouler à travers les anciens *M-x* à l'aide de *M-p*.
-3) J'ai oublié...
 
 ** Débogage pré-compilation
 Si le fichier /pdf/ ou /tex/ n'apparait pas, un buffer emacs *Org PDF LaTeX Output* devrait déjà être présent sur les lieux du crime. 
@@ -301,3 +315,24 @@ Il est donc préférable de toujours utiliser les commandes
   \bigskip
 #+end_src
 pour séparer des paragraphes.
+
+
+* Citations en org-mode
+** Introduction et installation de *Org-cite*
+En Org, il est possible de citer des  ouvrages provenant de fichiers *Bibtex*.
+Il suffit d'avoir une version de Org plus récente que la *version 9.5*.
+De base *Emacs* installe la version 9.3 en date de l'écriture de ce tutoriel.
+Pour installer la bonne version de *Org* (soit [[https://elpa.gnu.org/packages/org.html][la plus récente]]), il faut
+1) Supprimer le dossier [[file:~/.emacs.d/elpa][elpa]] dans notre dossier [[file:~/.emacs.d][.emacs.d]].
+   Ceci aura l'effet de tout supprimer les /packages/ installés, mais ce n'est pas très grave, *Emacs* s'occupera lui-même de les installer (/minor inconvenience/).
+2) Ré-ouvrir emacs en mode -Q justement pour empêcher *Emacs* d'installer n'importe quel /package/ de base sans notre consentement avant qu'on installe *Org*;
+3) Utiliser la commande *M-x package-install* et trouver *Org* + *RET* pour installer la dernière version de *Org*.
+Une fois ces trois tâches accomplit, on peut redémarer *Emacs* normalement et ouvrir un fichier *Org*.
+
+Pour plus d'info, le lecteur est invité à lire les articles
+- [[https://blog.tecosaur.com/tmio/2021-07-31-citations.html][This Month in Org : Introducing citations!]]
+- [[https://kristofferbalintona.me/posts/202206141852/][Citations in org-mode: Org-cite and Citar]]
+  
+** Utilisation
+Pour utiliser *Org-cite*, le lecteur est invité à utiliser la commande
+*M-x org-cite-insert* et de jouer là-dedans.

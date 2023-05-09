@@ -12,10 +12,10 @@ Pour m'aider dans cette /quête/ secondaire, j'ai réalisé de petits tutoriels 
 Bref, en espérant que le Charles-Édouard du futur (et/ou un.e aventurier en quête de solutions) trouvera de l'info pertinente dans ces dossiers.
 
 ** Tutoriels
-Dans le dossier /tutoriels/, vous trouverez quelques tutoriels assez simplistes pertinents à l'utilisation de Org-Mode et Org-LaTeX.
-Bien que l'apprentissage des commandes Org soit assez bien documenté sur l'Internet, vous trouverez quelques informations pertinentes sur les fonctionalités d'écriture.
-Par contre, la seconde partie de ces tutoriels est généralement dédiée au /débuggage/.
-Par exemple, dans le tutoriel Org-LaTeX, il y a *beaucoup* d'information sur le fonctionnement des /packages/ LaTeX, les distributions de compilation, etc. 
+Dans le dossier /tutoriels/, vous trouverez quelques tutoriels simplistes (mais pertinents) pour l'utilisation de Org-Mode, Org-LaTeX, Org-Cite, etc. 
+Bien que l'apprentissage des commandes Org soit assez bien documenté sur Internet, vous trouverez aussi des informations pertinentes sur les fonctionalités d'écriture.
+Notons que la seconde partie de ces tutoriels est généralement (complétement) dédiée au /débuggage/.
+Par exemple, dans le tutoriel Org-LaTeX, il y a *beaucoup* d'information sur le fonctionnement des /packages/ LaTeX, les distributions de compilation (AucTeX, TexLive, etc) et plus encore. 
 
 ** Gabarit LaTeX
 Dans le dossier /org-latex-template/, on retrouve plusieurs gabarits de préambules pour des fichiers LaTeX (en date de mai 2023, le terme /plusieurs/ réfère à /un seul/). 
