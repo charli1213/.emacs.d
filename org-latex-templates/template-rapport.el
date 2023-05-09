@@ -17,7 +17,7 @@
 
 \\usepackage{amsmath, amssymb, amsthm} % Symb. math. (Mathmode+Textmode) + Beaux théorèmes.
 
-\\usepackage{mathtools, cancel} % Utilisation de boîtes \\boxed{} + \\cancelto{}{}
+\\usepackage{mathtools} % Utilisation de boîtes \\boxed{} + \\cancelto{}{}
 \\usepackage{graphicx, wrapfig} % Géstion des figures.
 \\usepackage{hyperref} % Permettre l'utilisation d'hyperliens.
 \\usepackage{color} % Permettre l'utilisation des couleurs.

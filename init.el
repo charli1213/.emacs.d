@@ -17,8 +17,8 @@
 (load "~/.emacs.d/.custom.el")
 
 ;; Transparence : 
-(set-frame-parameter (selected-frame) 'alpha '(95 . 100))
-(add-to-list 'default-frame-alist '(alpha . (90 . 50)))
+;;(set-frame-parameter (selected-frame) 'alpha '(95 . 100))
+;;(add-to-list 'default-frame-alist '(alpha . (90 . 50)))
 
 ;; Retirer toutes les Toolbar ; 
 (tool-bar-mode -1)
@@ -69,12 +69,13 @@
   :config
 	 (setq org-bullets-bullet-list '(;;; Large
     "◉"
-    "✿"
     "○"
     "✸"
+    "✜"
     ;; ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶
     ;;; Small
     "►"
+    "•"
     ;;• ★ ▸
     )))
 

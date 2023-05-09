@@ -14,7 +14,7 @@ En *Org-Mode*, on utilise plutôt les *double-triple-quadruple-étoiles*.
 ** Texte en *gras*, /italique/ et _sous-ligné_. 
 Mettre du texte *en gras* à l'aide de *l'étoile de chaque côté*.\\
 
-Pour mettre du  en /italique/, on utilise la commande "/slash/" de chaque côté, de sorte que /Ceci est en italique/.\\
+Pour mettre du texte  en /italique/, on utilise la commande "/slash/" de chaque côté, de sorte que /Ceci est en italique/.\\
 
 Finalement, pour _sous-ligner_ un bout de texte, on utilise évidement le symbole /_underscore_/.
 
@@ -124,8 +124,6 @@ Finalement, on se souvient qu'il est possible de faire *Ctrl-c + Ctrl-t* pour ch
 Cette dernière fonctionnalité est aussi *applicable à l'intérieur de l'agenda*. 
   
 * Les tableaux
-
-
 Pour réaliser un tableau, il faut seulement se servir de la barre verticale pour séparer des éléments quelconques. 
 De sorte que,
 |--------+-------+-------------+------------|

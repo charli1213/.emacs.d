@@ -1,6 +1,6 @@
 #+TITLE: Org-Mode et LaTeX -- Instructions et débogage
 #+AUTHOR: Charles-Édouard Lizotte
-#+DATE: <2023-03-07 Tue> 
+#+DATE: 9 mai 2023
 #+Latex_CLASS: org-report
 #+cite_export: natbib
 
