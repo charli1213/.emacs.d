@@ -3,7 +3,7 @@
 #+DATE: 9 mai 2023
 
 
-* Introduction
+** Introduction
 Vous trouverez ici l'ensemble des modifications apportées à mon dossier /.emacs.d/.
 La plupart des travaux effectués sur ces fichiers ont été réalisés au début de ma maîtrise (~2019), mais un /grand bond en avant/ a été réalisé en 2023 dans le but d'utiliser les fonctionnalités de Org-Mode.
 Pour m'aider dans cette /quête/ secondaire, j'ai réalisé de petits tutoriels qui me permettent entre autre de
@@ -11,13 +11,13 @@ Pour m'aider dans cette /quête/ secondaire, j'ai réalisé de petits tutoriels 
 + conserver l'information nécessaire au /débuggage/ à chaque fois que je change d'ordinateurs (ce qui arrive malheureusement sur une base régulière).
 Bref, en espérant que le Charles-Édouard du futur (et/ou un.e aventurier en quête de solutions) trouvera de l'info pertinente dans ces dossiers.
 
-* Tutoriels
+** Tutoriels
 Dans le dossier /tutoriels/, vous trouverez quelques tutoriels assez simplistes pertinents à l'utilisation de Org-Mode et Org-LaTeX.
 Bien que l'apprentissage des commandes Org soit assez bien documenté sur l'Internet, vous trouverez quelques informations pertinentes sur les fonctionalités d'écriture.
 Par contre, la seconde partie de ces tutoriels est généralement dédiée au /débuggage/.
 Par exemple, dans le tutoriel Org-LaTeX, il y a *beaucoup* d'information sur le fonctionnement des /packages/ LaTeX, les distributions de compilation, etc. 
 
-* Gabarit LaTeX
+** Gabarit LaTeX
 Dans le dossier /org-latex-template/, on retrouve plusieurs gabarits de préambules pour des fichiers LaTeX (en date de mai 2023, le terme /plusieurs/ réfère à /un seul/). 
 Le premier est un gabarit que j'ai créé en me fiant sur les [[https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiEnfygl-n-AhU_jIkEHZ8dA24QFnoECBIQAQ&url=https%3A%2F%2Fpsrc.aapt.org%2Fcurricula%2Fcpsup%2F%3FDeliver%3D1%26SID%3D125%26SFID%3D647&usg=AOvVaw2BZhSsnP7JvI4BPJT7ZzVO][travaux de David M. Cook]] à l'université Lawrence.
 Le gabarit est sobre et compacte, car il tente de me réconcillier avec la police d'écriture /Computer Moder/, mais avec les serif.
