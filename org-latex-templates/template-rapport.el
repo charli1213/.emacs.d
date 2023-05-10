@@ -5,9 +5,12 @@
 % =================================BASE====================================%
 \\documentclass[10pt]{article}
 \\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry} % Marges
-\\usepackage[utf8]{inputenc} % Important pour symboles Francophones, é,à,etc.
+%\\usepackage{libertine}
+%\\usepackage{libertinust1math}
 \\usepackage[T1]{fontenc} % Nécessaire avec FrenchBabel
-%\\usepackage{lmodern}
+\\usepackage[utf8]{inputenc} % Important pour symboles Francophones, é,à,etc
+
+\\usepackage{lmodern}
 \\renewcommand{\\familydefault}{cmr} % La meilleure police (CMU Serif Roman) (Je me suis battu).
 
 \\usepackage{natbib} % Bibliographie
@@ -72,10 +75,12 @@
 \\newcommand{\\celsius}{${}^\\circ$ C} % \\degrée Celsius : Pas mal plus simple qu'utilise le package gensymb qui plante avec tout...
 
 % Vecteurs de base :
-\\newcommand{\\nvf}{\\hat{\\vb{n}}}
+\\newcommand{\\nvf}{\\vb{\\hat{n}}}
 \\newcommand{\\ivf}{\\vb{\\hat{i}}}
-\\newcommand{\\jvf}{\\hat{\\vb{j}}}
-\\newcommand{\\kvf}{\\hat{\\vb{k}}}
+\\newcommand{\\jvf}{\\vb{\\hat{j}}}
+\\newcommand{\\kvf}{\\vb{\\hat{k}}}
+
+\\newcommand{\\uu}{\\vb*{u}}
 
 % Boîte vide pour ajuster les underbrace
 \\newcommand{\\bigno}{\\vphantom{\\qty(\\frac{d}{q})}}
@@ -84,8 +89,6 @@
 % Moyenne numérique entre deux points de grilles. 
 \\newcommand{\\xmean}[1]{\\overline{#1}^x}
 \\newcommand{\\ymean}[1]{\\overline{#1}^y}
-
-
 
 % Tilde over psi
 \\newcommand{\\tpsi}{\\tilde{\\psi}}
