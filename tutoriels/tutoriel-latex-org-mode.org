@@ -36,21 +36,49 @@ permet de tout effacer d'un coup.
 Cette section sert avant tout à s'assurer qu'on peut utiliser le formattage Org pour créer des fichiers LaTeX.
 On y décrit donc les étapes parcourues pour faire fonctionner l'installation, ainsi que des commentaires pertinents. 
 
+#+NAME: fig:texlive
+#+CAPTION: Logo TexLive
+#+ATTR_LATEX: :float wrap :width 0.23\textwidth :placement [9]{r}{0.28\textwidth} \vspace{-\baselineskip}
+[[file:figures/Lsubn.png]]
+
 ** Installation de la distribution TexLive
-TexLive est une distribution libre qui s'occupe d'organiser les fameux /packages/ LaTeX.
-Bref, cette distribution s'assure que les /packages/ sont disponibles pour que la compilation par PDFLatex soit réussie.
-En premier lieux, on peut s'assurer que LaTeX est installé sur l'ordinateur, généralement avec *TeXLive*.
-Donc,
+
+TexLive est une distribution libre qui s'occupe d'organiser les nombreux /packages/ LaTeX.
+Bref, cette distribution s'assure que les /packages/ sont toujours disponibles pour que PDFLatex puisse compiler le fichier TeX.
+Si nous n'avions pas de distributions pour nos /packages/ LaTeX, nous devrions les installer à la main et les rendre accessibles.
+Ça peut sembler inhumain, mais c'est aussi possible de la faire, comme nous verrons dans la section sur CentOS.
+\bigskip
+
+En premier lieux, on s'assure que LaTeX est installé sur l'ordinateur -- généralement LaTeX est installé à l'aide de *TeXLive* sur les machine Debian.
+On peut réaliser cette action avec la commande
 #+begin_src bash
   >>> latex --version
 #+end_src
+ou plutôt avec la commande
+#+begin_src bash
+  >>> pdflatex --version
+  pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023)
+  kpathsea version 6.3.5
+  Copyright 2023 Han The Thanh (pdfTeX) et al.
+  There is NO warranty.  Redistribution of this software is
+  covered by the terms of both the pdfTeX copyright and
+  the Lesser GNU General Public License.
+  For more information about these matters, see the file
+  named COPYING and the pdfTeX source.
+  Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.
+  Compiled with libpng 1.6.39; using libpng 1.6.39
+  Compiled with zlib 1.2.13; using zlib 1.2.13
+  Compiled with xpdf version 4.04
+#+end_src
+
 Si c'est pas installé, on l'installe avec la commande
 #+begin_src bash
 >>> sudo apt install texlive
 #+end_src 
+Mais avant de se lancer, lisons les sections suivantes.
 
 ** Installation des modules (/packages/) LaTeX
-Ensuite, il risque de manquer quelques /packages/.
+Bien que TexLive est installé, il risque de manquer quelques /packages/, commel /physics/ et /cancel/ par exemple.
 Pour pallier à ce problème, nous utilisons la commande /tlmgr/.
 Malheureusement, il y a souvent des problèmes d'installation reliés à /tlmgr/, faut pas hésiter à essayer quand même,
 #+begin_src bash 
@@ -58,7 +86,7 @@ Malheureusement, il y a souvent des problèmes d'installation reliés à /tlmgr/
 (running on Debian, switching to user mode!)
 (see /usr/share/doc/texlive-base/README.tlmgr-on-Debian.md)
 
-tlmgr: Local TeX Live (2021) is older than remote repository (2022).
+tlmgr: Local TeX Live (2021) is older than remote repository (2023).
 Cross release updates are only supported with
   update-tlmgr-latest(.sh/.exe) --update
 See https://tug.org/texlive/upgrade.html for details.
@@ -99,7 +127,7 @@ Si ça ne marche toujours pas -- donc qu'on observe des dépendances non-résolu
 Pour confirmer qu'on ne fait pas n'importe quoi, on peut de nouveau essayer de vérifier les versions,
 #+begin_src bash
 >>> latex --version
-pdfTeX 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian)
+pdfTeX 3.141592653-2.6-1.40.22 (TeX Live 2023/dev/Debian)
 kpathsea version 6.3.4/dev
 Copyright 2021 Han The Thanh (pdfTeX) et al.
 There is NO warranty.  Redistribution of this software is
@@ -135,7 +163,7 @@ Un autre utilisateur de [[https://tex.stackexchange.com/questions/137428/tlmgr-c
 (running on Debian, switching to user mode!)
 (see /usr/share/doc/texlive-base/README.tlmgr-on-Debian.md)
 
-tlmgr: Local TeX Live (2021) is older than remote repository (2022).
+tlmgr: Local TeX Live (2021) is older than remote repository (2023).
 Cross release updates are only supported with
   update-tlmgr-latest(.sh/.exe) --update
 See https://tug.org/texlive/upgrade.html for details.
@@ -151,9 +179,9 @@ Après une autre heure de recherche, j'ai trouvé la [[https://www.tug.org/texli
 3. On ajoute quelques chemins à notre *PATH* en ajoutant les lignes
 #+begin_src bash
 # >>> Chemin pour TeXLive et tlmgr >>>
-export PATH="/usr/local/texlive/2022/bin/x86_64-linux:$PATH"
-export MANPATH="/usr/local/texlive/2022/texmf-dist/doc/man:$MANPATH"
-export INFOPATH="/usr/local/texlive/2022/texmf-dist/doc/info:$INFOPATH"
+export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
+export MANPATH="/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
+export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
 #+end_src
 à notre fichier /.bashrc/. 
 Bref, *maintenant*, tout devrait être en ordre! \newline
@@ -161,13 +189,13 @@ Bref, *maintenant*, tout devrait être en ordre! \newline
 Maintenant, on teste les versions pour être sur, on obtient
 #+begin_src bash
 >>> tlmgr --version
-tlmgr revision 63068 (2022-04-18 07:58:07 +0200)
-tlmgr using installation: /usr/local/texlive/2022
-TeX Live (https://tug.org/texlive) version 2022
+tlmgr revision 63068 (2023-04-18 07:58:07 +0200)
+tlmgr using installation: /usr/local/texlive/2023
+TeX Live (https://tug.org/texlive) version 2023
 >>> latex --version
-pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2022)
+pdfTeX 3.141592653-2.6-1.40.24 (TeX Live 2023)
 kpathsea version 6.3.4
-Copyright 2022 Han The Thanh (pdfTeX) et al.
+Copyright 2023 Han The Thanh (pdfTeX) et al.
 There is NO warranty.  Redistribution of this software is
 covered by the terms of both the pdfTeX copyright and
 the Lesser GNU General Public License.
@@ -198,7 +226,7 @@ Pour l'installation des /packages/, il est donc possible de passer par le /repo/
 *M-X org-export-dispatch* et on gosse dans la section LaTeX, avec les touches nécessaires montrées à l'écran. 
 Par exemple, on devrait avoir exporté un nouveau fichier en *tex*.
 
-** Débogage pré-compilation
+** Déboggage pré-compilation
 Si le fichier /pdf/ ou /tex/ n'apparait pas, un buffer emacs *Org PDF LaTeX Output* devrait déjà être présent sur les lieux du crime. 
 Si ça ne suffit pas, le fichier /tex/ dans le répertoire courant devrait nous renseigner sur les erreurs.
 

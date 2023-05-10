@@ -48,7 +48,7 @@
 (setq org-latex-pdf-process
   '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
 ;; > Path :On rajoute PDFLaTeX au path, car il ne le trouve pas, des fois.
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/texlive/2022/bin/x86_64-linux/"))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/texlive/2023/bin/x86_64-linux/"))
 
 ;; >> Org-Latex-Classes : On crée la variable org-latex-classes (variable vide)
 (setq org-latex-classes nil)

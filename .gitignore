@@ -1,6 +1,5 @@
 *~
 elpa/*
 eln-cache/*
-.custom.el
 tutoriels/*.pdf
 tutoriels/*.tex
