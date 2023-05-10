@@ -47,6 +47,7 @@ TexLive est une distribution libre qui s'occupe d'organiser les nombreux /packag
 Bref, cette distribution s'assure que les /packages/ sont toujours disponibles pour que PDFLatex puisse compiler le fichier TeX.
 Si nous n'avions pas de distributions pour nos /packages/ LaTeX, nous devrions les installer à la main et les rendre accessibles.
 Ça peut sembler inhumain, mais c'est aussi possible de la faire, comme nous verrons dans la section sur CentOS.
+pour véri
 \bigskip
 
 En premier lieux, on s'assure que LaTeX est installé sur l'ordinateur -- généralement LaTeX est installé à l'aide de *TeXLive* sur les machine Debian.
@@ -70,12 +71,32 @@ ou plutôt avec la commande
   Compiled with zlib 1.2.13; using zlib 1.2.13
   Compiled with xpdf version 4.04
 #+end_src
+Donc on voit ici que TexLive y est bien installé.
+On peut même voir tous les /packages/ qui sont installés à l'aide de la commande
+#+begin_src bash
+  >>> locate texlive
+#+end_src
+qui nous montre des centaines et des centaines de packages importants.
+Comme c'est trop d'information, on va tout simplement /piper/ le résultat dans un /grep/ pour trouver le /package/ /physics/
+#+begin_src bash
+  >>> locate texlive | grep "physics"
+  /usr/share/licenses/texlive-physics
+  /usr/share/licenses/texlive-physics/lppl1.txt
+  /usr/share/texlive/texmf-dist/tex/latex/physics
+  /usr/share/texlive/texmf-dist/tex/latex/lwarp/lwarp-physics.sty
+  /usr/share/texlive/texmf-dist/tex/latex/physics/physics.sty
+#+end_src
+Donc le /package/ /physics/ est bel et bien intallé.\bigskip
+
+*N.B.* Mentionnons qu'il y une ligne de command dans notre fichier [[file:~/.emacs.d/init.el][init.el]] qui dit à Emacs où se trouve TexLive et qu'il faut souvent la remettre au bon endroit en trouvant l'emplacement avec les commandes précédentes.
+
+*** TexLive n'est pas installé?
 
 Si c'est pas installé, on l'installe avec la commande
 #+begin_src bash
->>> sudo apt install texlive
+  >>> sudo apt install texlive
 #+end_src 
-Mais avant de se lancer, lisons les sections suivantes.
+Mais avant de se lancer, lisons les sections suivantes. 
 
 ** Installation des modules (/packages/) LaTeX
 Bien que TexLive est installé, il risque de manquer quelques /packages/, commel /physics/ et /cancel/ par exemple.
