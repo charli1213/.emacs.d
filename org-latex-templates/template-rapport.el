@@ -86,9 +86,16 @@
 \\newcommand{\\bigno}{\\vphantom{\\qty(\\frac{d}{q})}}
 \\newcommand{\\pt}{\\hspace{1pt}}
 
+% Physics spaces 
+\\newcommand{\\typical}{\\vphantom{A}}
+\\newcommand{\\tall}{\\vphantom{A^{x^x}_p}}
+\\newcommand{\\grande}{\\vphantom{\\frac{1}{xx}}}
+\\newcommand{\\venti}{\\vphantom{\\sum_x^x}}
+
 % Moyenne numérique entre deux points de grilles. 
 \\newcommand{\\xmean}[1]{\\overline{#1}^x}
 \\newcommand{\\ymean}[1]{\\overline{#1}^y}
+\\newcommand{\\zmean}[1]{\\overline{#1}^z}
 
 % Tilde over psi
 \\newcommand{\\tpsi}{\\tilde{\\psi}}
