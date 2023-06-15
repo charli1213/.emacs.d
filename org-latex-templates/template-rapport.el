@@ -81,12 +81,13 @@
 \\newcommand{\\kvf}{\\vb{\\hat{k}}}
 
 \\newcommand{\\uu}{\\vb*{u}}
+\\newcommand{\\vv}{\\vb*{v}}
 
 % Boîte vide pour ajuster les underbrace
 \\newcommand{\\bigno}{\\vphantom{\\qty(\\frac{d}{q})}}
 \\newcommand{\\pt}{\\hspace{1pt}}
 
-% Physics spaces 
+% Physics empty spaces 
 \\newcommand{\\typical}{\\vphantom{A}}
 \\newcommand{\\tall}{\\vphantom{A^{x^x}_p}}
 \\newcommand{\\grande}{\\vphantom{\\frac{1}{xx}}}
@@ -96,9 +97,14 @@
 \\newcommand{\\xmean}[1]{\\overline{#1}^x}
 \\newcommand{\\ymean}[1]{\\overline{#1}^y}
 \\newcommand{\\zmean}[1]{\\overline{#1}^z}
+\\newcommand{\\xymean}[1]{\\overline{#1}^{xy}}
 
 % Tilde over psi
 \\newcommand{\\tpsi}{\\tilde{\\psi}}
+
+% Nota Bene env :
+\\newcommand{\\nb}{\\textbf{N.B.}\\hspace{4pt}}
+   
 % ==============================NEWCOMMANDS================================%
 
 
@@ -115,7 +121,7 @@
 RÉALISÉ DANS LE CADRE\\\\ D'UN PROJET POUR \\par
 \\vspace{2cm}
 {\\Large ISMER--UQAR \\par}
-\\vspace{2cm}
+n\\vspace{2cm}
 {\\thedate}
 \\end{center}
 \\vfill

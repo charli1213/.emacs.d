@@ -1,0 +1,38 @@
+#+TITLE: Tutoriel Git & GitHub
+#+DATE: 18 mai 2023
+#+AUTHOR: Charles-Édouard Lizotte
+
+* Terminologie
+** Commit
+Un *commit* est un répertoire créé à un moment ou une date donnée.
+On pourrait comparer le *commit* à une borne dans l'avancement de notre projet.
+On peut donc y revenir, la télécharger, etc.
+On crée un *commit* à l'aide des la commande
+#+beging_src bash
+>>> git commit -m <branche>
+#+end_src
+
+** Push
+
+** Branches
+
+** Origin
+* Git
+| Commande   | Options          | Effet                                                   |
+|------------+------------------+---------------------------------------------------------|
+|------------+------------------+---------------------------------------------------------|
+| git commit | -m <Message>     | Crée un commit                                          |
+| git branch | --list           | Imprime les branches courantes                          |
+|            | <Branche>        | Crée une nouvelle branche                               |
+|            | -d <Branche>     | Supprime une branche                                    |
+| git log    |                  | Imprime le cahier des modifications                     |
+|            | --graph          | Imprime l'arbre des commits                             |
+|            | --oneline        | Spécifie d'imprimer légèrement                          |
+| git push   |                  |                                                         |
+|            | --all            | Pousse toutes les branches vers les répertoire en ligne |
+|            | origin <Branche> | Pousse une branche vers le répertoire en ligne /origin/ |
+
+
+* Branches
+
+* GitHub

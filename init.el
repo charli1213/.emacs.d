@@ -29,6 +29,29 @@
 (setq default-frame-alist '((left . 0) (width . 105) (fullscreen . fullheight)))
 
 
+;; >>> Keybinding :
+;; ----------------------------------------
+;; >> LaTeX equations
+(defun insert-latex-equation ()
+  "Insert a LaTeX equation in Org Mode"
+  (interactive)
+  (insert "\\begin{equation}\n   ")
+  (save-excursion
+     (insert "\n\\end{equation}")))
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-c e") #'insert-latex-equation))
+
+(defun insert-latex-nota-bene ()
+  "Insert a Nota Bene in Org Mode"
+  (interactive)
+  (insert "\\nb\\begin{minipage}[t]{0.9\\linewidth}
+\\itshape \n   ")
+   (save-excursion
+     (insert "\n\\end{minipage}")))
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-c n") #'insert-latex-nota-bene))
+
+
 ;; >>>> Org-Mode (Début) >>>>
 ;; ----------------------------------
 ;; >> Bibliographie 
@@ -60,6 +83,8 @@
 (setq org-startup-indented t)
 ;; > Line-break ou un retour de chariot qui fitte avec le l'indentation automatique. 
 (global-visual-line-mode t)
+;; > Équations en LaTeX seront highligtées.
+(setq org-highlight-latex-and-related '(native))
 
 
 ;; > Items : On change le type d'items pour les sections en org:
@@ -67,7 +92,9 @@
 (use-package org-bullets
   :hook (( org-mode ) . org-bullets-mode)
   :config
-	 (setq org-bullets-bullet-list '(;;; Large
+  (setq org-bullets-bullet-list '(;;; Large
+    "❀"
+    "☀"
     "◉"
     "○"
     "✸"
