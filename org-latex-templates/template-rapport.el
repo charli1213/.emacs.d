@@ -121,7 +121,7 @@
 RÉALISÉ DANS LE CADRE\\\\ D'UN PROJET POUR \\par
 \\vspace{2cm}
 {\\Large ISMER--UQAR \\par}
-n\\vspace{2cm}
+\\vspace{2cm}
 {\\thedate}
 \\end{center}
 \\vfill

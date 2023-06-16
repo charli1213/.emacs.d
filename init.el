@@ -37,10 +37,17 @@
   (interactive)
   (insert "\\begin{equation}\n   ")
   (save-excursion
-     (insert "\n\\end{equation}")))
-(with-eval-after-load 'org
-  (define-key org-mode-map (kbd "C-c e") #'insert-latex-equation))
+    (insert "\n\\end{equation}")))
 
+;; >> LaTeX align
+(defun insert-latex-align ()
+  "Insert a LaTeX align in Org Mode"
+  (interactive)
+  (insert "\\begin{align}\n   ")
+  (save-excursion
+    (insert "\n\\end{align}")))
+
+;; >> LaTeX Nota Bene
 (defun insert-latex-nota-bene ()
   "Insert a Nota Bene in Org Mode"
   (interactive)
@@ -48,7 +55,10 @@
 \\itshape \n   ")
    (save-excursion
      (insert "\n\\end{minipage}")))
+
 (with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-c e") #'insert-latex-equation)
+  (define-key org-mode-map (kbd "C-c a") #'insert-latex-align)
   (define-key org-mode-map (kbd "C-c n") #'insert-latex-nota-bene))
 
 
@@ -93,8 +103,8 @@
   :hook (( org-mode ) . org-bullets-mode)
   :config
   (setq org-bullets-bullet-list '(;;; Large
-    "❀"
     "☀"
+    "❀"
     "◉"
     "○"
     "✸"
