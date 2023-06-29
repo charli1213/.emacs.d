@@ -1,4 +1,4 @@
-;; Création d'une classe de fichier setupfile LaTeX à utiliser.
+; Création d'une classe de fichier setupfile LaTeX à utiliser.
 (add-to-list 'org-latex-classes
 	     '("org-report" 
 	       "
