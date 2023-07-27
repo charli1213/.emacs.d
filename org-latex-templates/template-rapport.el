@@ -56,7 +56,6 @@
 \\usepackage[textfont = it]{caption} 
 \\captionsetup[wrapfigure]{margin=0.5cm}
 
-
 % Retirer le l'écriture en gras dans la table des matières
 \\usepackage{tocloft}
 \\renewcommand{\\cftsecfont}{\\normalfont}
@@ -65,7 +64,9 @@
 % Change bullet style
 \\usepackage{pifont}
 \\usepackage{enumitem}
-\\setlist[itemize,1]{label=\\ding{224}}
+%\\setlist[itemize,1]{label=\\ding{224}}
+\\setlist[itemize,1]{label=\\ding{239}}
+\\renewcommand{\\boxtimes}{\\blacksquare}
 % ================================SETTINGS=================================%
 
 

@@ -195,15 +195,25 @@ Au final, impossible de mettre le module à jour, car les versions sont différe
 ** Solution
 Après une autre heure de recherche, j'ai trouvé la [[https://www.tug.org/texlive/quickinstall.html][solution]] (qui est en fait le lien proposé par /tlmgr/ lui-même).
 
-1. On commence par purger tout ce qui est en lien avec *texlive* (comme on a fait précédemment).
-2. On installe le tar.gz comme proposé sur le site -- Ça devrait prendre un bon 30 minutes d'installation. 
+1. On commence par purger tout ce qui est en lien avec *TexLive* (comme on l'a fait précédemment).
+   #+begin_src bash
+     >>> sudo apt-get purge texlive-*
+   #+end_src
+2. On installe le tar.gz dans un dossier temporaire e.g. /tmp/, comme proposé sur le [[https://www.tug.org/texlive/quickinstall.html][site de TexLive]]. Au final, tout ça devrait prendre une bonne trentaine de minutes d'installation pour laisser le temps à la commande /perl/ de passer par dessus tous les modules LaTeX possibles.
+   #+begin_src bash
+     >>> cd tmp
+     >>> wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+     >>> zcat < install-tl-unx.tar.gz | tar xf -
+     >>> cd install-tl-*
+     >>> sudo perl ./install-tl --no-interaction
+   #+end_src
 3. On ajoute quelques chemins à notre *PATH* en ajoutant les lignes
-#+begin_src bash
-# >>> Chemin pour TeXLive et tlmgr >>>
-export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
-export MANPATH="/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
-export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
-#+end_src
+   #+begin_src bash
+     # >>> Chemin pour TeXLive et tlmgr >>>
+     export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
+     export MANPATH="/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
+     export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
+   #+end_src
 à notre fichier /.bashrc/. 
 Bref, *maintenant*, tout devrait être en ordre! \newline
 

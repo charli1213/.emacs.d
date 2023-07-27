@@ -69,6 +69,7 @@
 ;; M-x org-version
 ;; Pour installer : 
 ;; M-x list-package (RET) Trouver org (Ret) installer.
+;; M-x list-package (RET) Trouver citeproc (Ret) installer.
 (require 'citeproc)
 
 ;; >> Org-Agenda :
@@ -103,9 +104,9 @@
   :hook (( org-mode ) . org-bullets-mode)
   :config
   (setq org-bullets-bullet-list '(;;; Large
-    "☀"
     "❀"
     "◉"
+    "☀"
     "○"
     "✸"
     "✜"
