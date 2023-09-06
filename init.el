@@ -17,7 +17,7 @@
 (load "~/.emacs.d/.custom.el")
 
 ;; Transparence : 
-(set-frame-parameter (selected-frame) 'alpha '(85 . 100))
+(set-frame-parameter (selected-frame) 'alpha '(95 . 100))
 (add-to-list 'default-frame-alist '(alpha . (90 . 50)))
 
 ;; Retirer toutes les Toolbar ; 

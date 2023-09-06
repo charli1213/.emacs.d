@@ -12,15 +12,16 @@
 
 \\usepackage{lmodern}
 \\renewcommand{\\familydefault}{cmr} % La meilleure police (CMU Serif Roman) (Je me suis battu).
+\\usepackage{mathrsfs} %Permet la command \\mathscr (Lettres attachées genre)
 
-\\usepackage{natbib} % Bibliographie
+\\usepackage[round, sort]{natbib} % Bibliographie
 \\bibliographystyle{abbrvnat}
 
 
 
 \\usepackage{amsmath, amssymb, amsthm} % Symb. math. (Mathmode+Textmode) + Beaux théorèmes.
 
-\\usepackage{mathtools,cancel} % Utilisation de boîtes \\boxed{} + \\cancelto{}{}
+\\usepackage{mathtools,cancel,nicefrac} % Utilisation de boîtes \\boxed{} + \\cancelto{}{}
 \\usepackage{graphicx, wrapfig} % Géstion des figures.
 \\usepackage{hyperref} % Permettre l'utilisation d'hyperliens.
 \\usepackage{color} % Permettre l'utilisation des couleurs.
@@ -47,7 +48,12 @@
 
 % Couleurs de hyperliens :
 \\definecolor{mypink}{RGB}{147, 0, 255}
-\\hypersetup{colorlinks, urlcolor=mypink, citecolor=mypink, linkcolor=mypink}
+\\hypersetup{colorlinks, 
+             filecolor=mypink,
+             urlcolor=mypink, 
+             citecolor=mypink, 
+             linkcolor=mypink, 
+             anchorcolor=mypink}
 
 % Numéros d'équations suivent les sections :
 \\numberwithin{equation}{section} 
@@ -102,9 +108,10 @@
 
 % Tilde over psi
 \\newcommand{\\tpsi}{\\tilde{\\psi}}
+\\newcommand{\\tphi}{\\tilde{\\phi}}
 
 % Nota Bene env :
-\\newcommand{\\nb}{\\textbf{N.B.}\\hspace{4pt}}
+\\newcommand{\\nb}{\\ding{165}\\ \\textbf{N.B.}\\hspace{4pt}}
    
 % ==============================NEWCOMMANDS================================%
 
@@ -140,7 +147,7 @@ ISMER-UQAR
 \\usepackage{fancyhdr}
 \\pagestyle{fancy}
 \\setlength{\\headheight}{13pt}
-\\renewcommand{\\headrulewidth}{1.3pt} % Ligne horizontale en haut
+\\renewcommand{\\headrulewidth}{0.05pt} % Ligne horizontale en haut
 
 \\fancyhead[R]{\\textit{\\thetitle}}
 \\fancyhead[L]{\\ \\thepage}
