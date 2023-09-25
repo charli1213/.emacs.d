@@ -56,10 +56,20 @@
    (save-excursion
      (insert "\n\\end{minipage}")))
 
+;; >> 
+(defun insert-source-bash ()
+  "Insert a #+begin_src bash and #+end_src"
+  (interactive)
+  (insert "#+begin_src bash\n  ")
+  (save-excursion
+    (insert "\n#+end_src")))
+
+
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-c e") #'insert-latex-equation)
   (define-key org-mode-map (kbd "C-c a") #'insert-latex-align)
-  (define-key org-mode-map (kbd "C-c n") #'insert-latex-nota-bene))
+  (define-key org-mode-map (kbd "C-c n") #'insert-latex-nota-bene)
+  (define-key org-mode-map (kbd "C-c b") #'insert-source-bash))
 
 
 ;; >>>> Org-Mode (Début) >>>>
@@ -96,7 +106,8 @@
 (global-visual-line-mode t)
 ;; > Équations en LaTeX seront highligtées.
 (setq org-highlight-latex-and-related '(native))
-
+;; > begin_src conservent l'indentation au lieu de s'en débarrasser à la compilation
+(setq org-src-preserve-indentation t)
 
 ;; > Items : On change le type d'items pour les sections en org:
 ;; (package-install 'org-bullets) si ça marche pas

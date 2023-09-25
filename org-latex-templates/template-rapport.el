@@ -5,22 +5,21 @@
 % =================================BASE====================================%
 \\documentclass[10pt]{article}
 \\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry} % Marges
-%\\usepackage{libertine}
-%\\usepackage{libertinust1math}
 \\usepackage[T1]{fontenc} % Nécessaire avec FrenchBabel
 \\usepackage[utf8]{inputenc} % Important pour symboles Francophones, é,à,etc
 
+
+% Calligraphie
 \\usepackage{lmodern}
 \\renewcommand{\\familydefault}{cmr} % La meilleure police (CMU Serif Roman) (Je me suis battu).
 \\usepackage{mathrsfs} %Permet la command \\mathscr (Lettres attachées genre)
 
+% Bibliographie
 \\usepackage[round, sort]{natbib} % Bibliographie
 \\bibliographystyle{abbrvnat}
 
 
-
 \\usepackage{amsmath, amssymb, amsthm} % Symb. math. (Mathmode+Textmode) + Beaux théorèmes.
-
 \\usepackage{mathtools,cancel,nicefrac} % Utilisation de boîtes \\boxed{} + \\cancelto{}{}
 \\usepackage{graphicx, wrapfig} % Géstion des figures.
 \\usepackage{hyperref} % Permettre l'utilisation d'hyperliens.
@@ -28,15 +27,16 @@
 \\usepackage[dvipsnames]{xcolor} % Couleurs avancées.
 \\usepackage{titling} % Donne accès à \\theauthor, \\thetitle, \\thedate
 
-% >>> Physique >>>
+% Physique
 \\usepackage{physics} % Meilleur package pour physicien. 
 \\usepackage{pxfonts} % Rajoute PLEIN de symboles mathématiques, dont les intégrales doubles et triples
-% <<< Physique <<<
 
+% Style
 \\usepackage{lipsum} % For fun
 \\usepackage{tikz} % Realisation de figures TIKZ.
 \\usepackage{empheq} % Boite autour de MULTIPLE équations
 
+% Français
 \\usepackage[french]{babel} % Environnements en Français.
 % ==============================BASE-(END)=================================%
 
@@ -44,7 +44,8 @@
 
 % ================================SETTINGS=================================%
 % Pas d'indentation en début de paragraphe :
-\\setlength\\parindent{0pt} 
+\\setlength\\parindent{0pt}
+\\setlength{\\parskip}{0.15cm}
 
 % Couleurs de hyperliens :
 \\definecolor{mypink}{RGB}{147, 0, 255}
@@ -78,27 +79,21 @@
 
 
 % ==============================NEWCOMMANDS================================%
-% Degrés Celsius :
-\\newcommand{\\celsius}{${}^\\circ$ C} % \\degrée Celsius : Pas mal plus simple qu'utilise le package gensymb qui plante avec tout...
 
 % Vecteurs de base :
 \\newcommand{\\nvf}{\\vb{\\hat{n}}}
 \\newcommand{\\ivf}{\\vb{\\hat{i}}}
 \\newcommand{\\jvf}{\\vb{\\hat{j}}}
 \\newcommand{\\kvf}{\\vb{\\hat{k}}}
-
 \\newcommand{\\uu}{\\vb*{u}}
 \\newcommand{\\vv}{\\vb*{v}}
-
-% Boîte vide pour ajuster les underbrace
-\\newcommand{\\bigno}{\\vphantom{\\qty(\\frac{d}{q})}}
-\\newcommand{\\pt}{\\hspace{1pt}}
 
 % Physics empty spaces 
 \\newcommand{\\typical}{\\vphantom{A}}
 \\newcommand{\\tall}{\\vphantom{A^{x^x}_p}}
 \\newcommand{\\grande}{\\vphantom{\\frac{1}{xx}}}
 \\newcommand{\\venti}{\\vphantom{\\sum_x^x}}
+\\newcommand{\\pt}{\\hspace{1pt}} % One horizontal pt space
 
 % Moyenne numérique entre deux points de grilles. 
 \\newcommand{\\xmean}[1]{\\overline{#1}^x}
@@ -110,8 +105,8 @@
 \\newcommand{\\tpsi}{\\tilde{\\psi}}
 \\newcommand{\\tphi}{\\tilde{\\phi}}
 
-% Nota Bene env :
-\\newcommand{\\nb}{\\ding{165}\\ \\textbf{N.B.}\\hspace{4pt}}
+% Nota Bene env : (\\ding{89})
+\\newcommand{\\nb}{\\raisebox{0.8pt}{\\scriptsize\\textleaf}\\ $\\mathscr{N. B.}$\\hspace{4pt}}
    
 % ==============================NEWCOMMANDS================================%
 
@@ -147,7 +142,7 @@ ISMER-UQAR
 \\usepackage{fancyhdr}
 \\pagestyle{fancy}
 \\setlength{\\headheight}{13pt}
-\\renewcommand{\\headrulewidth}{0.05pt} % Ligne horizontale en haut
+\\renewcommand{\\headrulewidth}{0.025pt} % Ligne horizontale en haut
 
 \\fancyhead[R]{\\textit{\\thetitle}}
 \\fancyhead[L]{\\ \\thepage}
