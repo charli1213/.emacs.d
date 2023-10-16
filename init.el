@@ -108,6 +108,8 @@
 (setq org-highlight-latex-and-related '(native))
 ;; > begin_src conservent l'indentation au lieu de s'en débarrasser à la compilation
 (setq org-src-preserve-indentation t)
+;; > largeur de base des images
+(setq org-image-actual-width nil)
 
 ;; > Items : On change le type d'items pour les sections en org:
 ;; (package-install 'org-bullets) si ça marche pas
