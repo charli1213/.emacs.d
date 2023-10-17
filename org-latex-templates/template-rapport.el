@@ -24,6 +24,7 @@
 \\usepackage{graphicx, wrapfig} % Géstion des figures.
 \\usepackage{hyperref} % Permettre l'utilisation d'hyperliens.
 \\usepackage{color} % Permettre l'utilisation des couleurs.
+\\usepackage{colortbl} % Color tables
 \\usepackage[dvipsnames]{xcolor} % Couleurs avancées.
 \\usepackage{titling} % Donne accès à \\theauthor, \\thetitle, \\thedate
 
@@ -47,6 +48,12 @@
 \\setlength\\parindent{0pt}
 \\setlength{\\parskip}{0.15cm}
 
+% Tableaux/tabular
+% Espace vertical dans les tabular/tableaux
+\\renewcommand{\\arraystretch}{1.2}
+% Couleur des tableaux/tabular
+\\rowcolors{2}{violet!5}{}
+
 % Couleurs de hyperliens :
 \\definecolor{mypink}{RGB}{147, 0, 255}
 \\hypersetup{colorlinks, 
@@ -56,6 +63,8 @@
              linkcolor=mypink, 
              anchorcolor=mypink}
 
+
+
 % Numéros d'équations suivent les sections :
 \\numberwithin{equation}{section} 
 
@@ -63,7 +72,7 @@
 \\usepackage[textfont = it]{caption} 
 \\captionsetup[wrapfigure]{margin=0.5cm}
 
-% Retirer le l'écriture en gras dans la table des matières
+% Retirer l'écriture en gras dans la table des matières
 \\usepackage{tocloft}
 \\renewcommand{\\cftsecfont}{\\normalfont}
 \\renewcommand{\\cftsecpagefont}{\\normalfont}
