@@ -12,7 +12,10 @@
 % Calligraphie
 \\usepackage{lmodern}
 \\renewcommand{\\familydefault}{cmr} % La meilleure police (CMU Serif Roman) (Je me suis battu).
-\\usepackage{mathrsfs} %Permet la command \\mathscr (Lettres attachées genre)
+%\\usepackage{unicode-math} % À réessayer...
+%\\setmathfont{Latin Modern Math} % À réessayer...
+\\usepackage{mathrsfs} %Permet la command \\mathscr (Lettres attachées genre) \mathscr(B)
+
 
 % Bibliographie
 \\usepackage[round, sort]{natbib} % Bibliographie
@@ -94,8 +97,9 @@
 \\newcommand{\\ivf}{\\vb{\\hat{i}}}
 \\newcommand{\\jvf}{\\vb{\\hat{j}}}
 \\newcommand{\\kvf}{\\vb{\\hat{k}}}
-\\newcommand{\\uu}{\\vb*{u}}
-\\newcommand{\\vv}{\\vb*{v}}
+\\newcommand{\\uu}{\\vb{u}}
+\\newcommand{\\vv}{\\vb{v}}
+\\newcommand{\\ust}{\\vb{u}_{\\ast}}
 
 % Physics empty spaces 
 \\newcommand{\\typical}{\\vphantom{A}}
@@ -116,7 +120,8 @@
 
 % Nota Bene env : (\\ding{89})
 \\newcommand{\\nb}{\\raisebox{0.8pt}{\\scriptsize\\textleaf}\\ $\\mathscr{N. B.}$\\hspace{4pt}}
-   
+\\newcommand{\\cmark}{\\ding{52}}
+\\newcommand{\\xmark}{\\ding{55}}
 % ==============================NEWCOMMANDS================================%
 
 
@@ -140,7 +145,8 @@ RÉALISÉ DANS LE CADRE\\\\ D'UN PROJET POUR \\par
 Rédaction \\\\
 {\\theauthor}\\\\
 \\url{charles-edouard.lizotte@uqar.ca}\\\\
-ISMER-UQAR
+ISMER-UQAR\\\\
+Police d'écriture : \\textbf{CMU Serif Roman}
 \\end{titlepage}
 }
 % ==============================PAGE-TITRE=================================%
