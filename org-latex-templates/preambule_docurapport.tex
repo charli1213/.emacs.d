@@ -1,0 +1,194 @@
+
+% =================================BASE====================================%
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry} % Marges
+\usepackage[T1]{fontenc} % Nécessaire avec FrenchBabel
+\usepackage[utf8]{inputenc} % Important pour symboles Francophones, é,à,etc
+\usepackage{csquotes} % Recommandé par PDFLatex lors de la compilation. 
+
+% Calligraphie
+%\usepackage{pxfonts} % Met le texte ET les maths en Palatino + donne accès à des symboles math
+\usepackage{palatino} % Cette commande met seulement le texte en police palatino
+\usepackage{lmodern} % Pour les maths? Lmodern pour les maths
+% Use lmodern for sans-serif
+\usepackage{mathrsfs} % Permet la command \mathscr (Lettres attachées genre) \mathscr(B)
+
+% Bibliographie
+%\usepackage[backend=bibtex,style=phys,sorting=ynt]{biblatex}
+\usepackage[backend=biber,style=ieee,sorting=ynt]{biblatex} % N'est pas utilisé par le compilateur org-mode, mais NÉCESSAIRE. Voir le fichier init.el pour changer le style. 
+
+
+\usepackage{amsmath, amssymb, amsthm} % Symb. math. (Mathmode+Textmode) + Beaux théorèmes.
+\usepackage{mathtools,cancel,xfrac} % Utilisation de boîtes \boxed{} + \cancelto{}{}, xfrac
+\usepackage{graphicx, wrapfig} % Géstion des figures.
+\usepackage{hyperref} % Permettre l'utilisation d'hyperliens.
+\usepackage{color} % Permettre l'utilisation des couleurs.
+\usepackage{colortbl} % Color tables
+\usepackage[dvipsnames]{xcolor} % Couleurs avancées.
+
+% Physique
+\usepackage{physics} % Meilleur package pour physicien. 
+
+% Style
+\usepackage{lipsum} % For fun
+\usepackage{tikz} % Realisation de figures TIKZ.
+\usetikzlibrary{arrows.meta,bending} % Arrow heads 
+\usepackage{empheq} % Boite autour de MULTIPLE équations
+\usepackage{bbding}
+
+% Français
+\usepackage[french]{babel} % Environnements en Français.
+
+\usepackage{titling} % Donne accès à \theauthor, \thetitle, \thedate
+
+% ==============================BASE-(END)=================================%
+
+
+
+
+
+% ================================SETTINGS=================================%
+% Pas d'indentation en début de paragraphe :
+\setlength\parindent{0pt}
+\setlength{\parskip}{0.15cm}
+
+% Tableaux/tabular
+% Espace vertical dans les tabular/tableaux
+\renewcommand{\arraystretch}{1.2}
+% Couleur des tableaux/tabular
+% \rowcolors{3}{violet!5}{}
+
+% Couleurs de hyperliens :
+\definecolor{mypink}{RGB}{147, 0, 255}
+\hypersetup{colorlinks, 
+             filecolor=mypink,
+             urlcolor=Violet, 
+             citecolor=mypink, 
+             linkcolor=mypink, 
+             anchorcolor=mypink}
+
+
+% Numéros d'équations suivent les sections :
+\numberwithin{equation}{section} 
+
+% Les « captions » sont en italique et largeur limitée
+\usepackage[textfont = it]{caption} 
+\captionsetup[wrapfigure]{margin=0.5cm}
+
+% Retirer l'écriture en gras dans la table des matières
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+
+% Change bullet style
+\usepackage{pifont}
+\usepackage{enumitem}
+%\setlist[itemize,1]{label=\ding{224}}
+\setlist[itemize,1]{label=\ding{239}}
+\renewcommand{\boxtimes}{\blacksquare}
+% ================================SETTINGS=================================%
+
+
+
+% ==============================NEWCOMMANDS================================%
+% CQFD symbol
+\renewcommand{\qedsymbol}{$\hfill\blacksquare$}
+
+% Vecteurs de base :
+\newcommand{\nvf}{\vb{\hat{n}}}
+\newcommand{\evf}{\vb{\hat{e}}}
+\newcommand{\ivf}{\vb{\hat{i}}}
+\newcommand{\jvf}{\vb{\hat{j}}}
+\newcommand{\kvf}{\vb{\hat{k}}}
+\newcommand{\uu}{\vb{u}}
+\newcommand{\vv}{\vb{v}}
+\newcommand{\ust}{\vb{u}_{\ast}}
+
+% Physics empty spaces 
+\newcommand{\short}{\vphantom{pA}}
+\newcommand{\tall}{\vphantom{pA^{x^x}_p}}
+\newcommand{\grande}{\vphantom{\frac{1}{xx}}}
+\newcommand{\venti}{\vphantom{\sum_x^x}}
+\newcommand{\pt}{\hspace{1pt}} % One horizontal pt space
+
+% Moyenne numérique entre deux points de grilles. 
+\newcommand{\xmean}[1]{\overline{#1}^x}
+\newcommand{\ymean}[1]{\overline{#1}^y}
+\newcommand{\zmean}[1]{\overline{#1}^z}
+\newcommand{\xymean}[1]{\overline{#1}^{xy}}
+
+% Tilde over psi
+\newcommand{\tpsi}{\tilde{\psi}}
+\newcommand{\tphi}{\tilde{\phi}}
+
+% Nota Bene env : (\ding{89})
+%\newcommand{\nb}{$\boxed{\text{\footnotesize\EightStarConvex}\pt \mathfrak{N. B.}}$\hspace{4pt}}
+\newcommand{\nb}{\underline{{\footnotesize\EightStarConvex}\pt $\mathfrak{N.B.}$\vphantom{p}}\hspace{3pt}}
+
+\newcommand{\exemple}{
+\parbox[center]{2.2cm}{\begin{tcolorbox}[sharp corners, rounded corners=northeast, rounded corners=southeast,
+colback=Violet!5, colframe=black,
+size=small, width=2cm, left=-0.25pt, bottom=-0.5pt,
+arc is angular, arc=2.5mm, boxrule=0.35pt, leftrule=4pt, %bottomrule=1pt,
+after={\enskip}] Exemple \end{tcolorbox}}}
+
+\newcommand{\cqfd}{\hfill$\blacktriangleleft$}
+
+% Define the nota bene environment
+\usepackage{tcolorbox}
+\newtcolorbox{notabene}{
+     colback=blue!5,
+     colframe=black,
+     boxrule=0.5pt,
+     arc=2pt,
+     left=5pt,
+     right=5pt,
+     top=5pt,
+     bottom=5pt,
+}
+
+
+\newcommand{\cmark}{\ding{52}}
+\newcommand{\xmark}{\ding{55}}
+% ==============================NEWCOMMANDS================================%
+
+
+
+% ==============================PAGE-TITRE=================================%
+% Titlepage 
+\newcommand{\mytitlepage}{
+\begin{titlepage}
+\begin{center}
+{\Huge \thesubtitle \par}
+\vspace{2cm}
+{\Huge \MakeUppercase{\thetitle} \par}
+\vspace{2cm}
+RÉALISÉ DANS LE CADRE\\ D'UN PROJET POUR \par
+\vspace{2cm}
+{\Huge ISMER--UQAR \par}
+\vspace{2cm}
+{\thedate}
+\end{center}
+\vfill
+Rédaction \\
+{\theauthor}\\
+\url{charles-edouard.lizotte@uqar.ca}\\
+ISMER-UQAR\\
+Police d'écriture : \textbf{CMU Serif Roman}
+\end{titlepage}
+}
+% ==============================PAGE-TITRE=================================%
+
+
+
+% =================================ENTÊTE==================================%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{13pt}
+\renewcommand{\headrulewidth}{0.025pt} % Ligne horizontale en haut
+
+\fancyhead[R]{\textit{\thetitle}}
+\fancyhead[L]{\ \thepage}
+\fancyfoot[R]{\textit{\theauthor}}
+\fancyfoot[L]{}
+\fancyfoot[C]{} 
+% =================================ENTÊTE==================================%
