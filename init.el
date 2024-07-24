@@ -30,6 +30,13 @@
 ;; Emacs commence à gauche (width=105 for work computer)
 (setq default-frame-alist '((left . 0) (width . 105) (fullscreen . fullheight)))
 
+;; Important pour que Julia marche avec emacs : 
+(use-package vterm
+  :ensure t)
+;; Now run `M-x vterm` and make sure it works!
+(use-package julia-snail
+  :ensure t
+  :hook (julia-mode . julia-snail-mode))
 
 
 ;; >>> -------------------- KEYBINDING -------------------- >>>

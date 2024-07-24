@@ -18,7 +18,7 @@
  '(main-line-color2 "#111111")
  '(main-line-separator-style 'chamfer)
  '(package-selected-packages
-   '(exec-path-from-shell use-package simple-httpd ox-latex-subfigure org-superstar org-bullets citeproc-org))
+   '(julia-snail vterm ## exec-path-from-shell use-package simple-httpd ox-latex-subfigure org-superstar org-bullets citeproc-org))
  '(powerline-color1 "#1E1E1E")
  '(powerline-color2 "#111111"))
 (custom-set-faces
