@@ -7,14 +7,15 @@
 
 % Calligraphie
 %\usepackage{pxfonts} % Met le texte ET les maths en Palatino + donne accès à des symboles math
-\usepackage{palatino} % Cette commande met seulement le texte en police palatino
+%\usepackage{palatino} % Cette commande met seulement le texte en police palatino
 \usepackage{lmodern} % Pour les maths? Lmodern pour les maths
+\usepackage{cfr-lm}
 % Use lmodern for sans-serif
 \usepackage{mathrsfs} % Permet la command \mathscr (Lettres attachées genre) \mathscr(B)
 
 % Bibliographie
-%\usepackage[backend=bibtex,style=phys,sorting=ynt]{biblatex}
-\usepackage[backend=biber,style=ieee,sorting=ynt]{biblatex} % N'est pas utilisé par le compilateur org-mode, mais NÉCESSAIRE. Voir le fichier init.el pour changer le style. 
+\usepackage[backend=bibtex,style=apa,sorting=ynt]{biblatex}
+%\usepackage[backend=biber,style=ieee,sorting=ynt]{biblatex} % Ça semble tout changer.
 
 
 \usepackage{amsmath, amssymb, amsthm} % Symb. math. (Mathmode+Textmode) + Beaux théorèmes.
@@ -61,7 +62,7 @@
 \definecolor{mypink}{RGB}{147, 0, 255}
 \hypersetup{colorlinks, 
              filecolor=mypink,
-             urlcolor=Violet, 
+             urlcolor=mypink, 
              citecolor=mypink, 
              linkcolor=mypink, 
              anchorcolor=mypink}
@@ -126,10 +127,13 @@
 
 \newcommand{\exemple}{
 \parbox[center]{2.2cm}{\begin{tcolorbox}[sharp corners, rounded corners=northeast, rounded corners=southeast,
-colback=Violet!5, colframe=black,
+colback=Violet!2, colframe=black,
 size=small, width=2cm, left=-0.25pt, bottom=-0.5pt,
 arc is angular, arc=2.5mm, boxrule=0.35pt, leftrule=4pt, %bottomrule=1pt,
 after={\enskip}] Exemple \end{tcolorbox}}}
+
+\newcommand{\rad}{\text{Rad}}
+
 
 \newcommand{\cqfd}{\hfill$\blacktriangleleft$}
 

@@ -19,8 +19,8 @@
 (load "~/.emacs.d/.custom.el")
 
 ;; Transparence : 
-(set-frame-parameter (selected-frame) 'alpha '(99 . 100))
-(add-to-list 'default-frame-alist '(alpha . (95 . 50)))
+(set-frame-parameter (selected-frame) 'alpha '(95 . 100))
+(add-to-list 'default-frame-alist '(alpha . (90 . 50)))
 
 ;; Retirer toutes les Toolbar ; 
 (tool-bar-mode -1)
@@ -30,13 +30,13 @@
 ;; Emacs commence à gauche (width=105 for work computer)
 (setq default-frame-alist '((left . 0) (width . 105) (fullscreen . fullheight)))
 
-;; Important pour que Julia marche avec emacs : 
-(use-package vterm
-  :ensure t)
-;; Now run `M-x vterm` and make sure it works!
-(use-package julia-snail
-  :ensure t
-  :hook (julia-mode . julia-snail-mode))
+;;;;;;; Important pour que Julia marche avec emacs : 
+;;;;;(use-package vterm
+;;;;;  :ensure t)
+;;;;;;; Now run `M-x vterm` and make sure it works!
+;;;;;(use-package julia-snail
+;;;;;  :ensure t
+;;;;;  :hook (julia-mode . julia-snail-mode))
 
 
 ;; >>> -------------------- KEYBINDING -------------------- >>>
@@ -69,7 +69,7 @@
 (defun insert-source-bash ()
   "Insert a #+begin_src bash and #+end_src"
   (interactive)
-  (insert "#+begin_src bash\n  ")
+  (insert "#+begin_src bash\n >>> ")
   (save-excursion
     (insert "\n#+end_src")))
 
@@ -131,7 +131,7 @@
 ;;  > On peut connecter des tuples pour forcer un style ("phys" par exemple ici).
 ;;  > "t" active la switch "tout le reste". 
 (setq org-cite-export-processors
-      '((latex . (biblatex "authoryear")) ;; fichiers latex
+      '((latex . (biblatex "authoryear-comp")) ;; fichiers latex
       (beamer natbib) ;; pour les beamers
       (t csl))) ;; Pour tout le reste
 
@@ -231,7 +231,10 @@
 
 ;; > Section : On change le type d'items pour les sections en org:
 ;;   (package-install 'org-superstar) si ça ne marche pas.
-(require 'org-superstar)
+;;x(require 'org-superstar)
+(use-package org-superstar
+  :ensure t)
+
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 (setq org-superstar-headline-bullets-list '(;;; Large
 				  ;"❀"
@@ -247,17 +250,3 @@
 				  ;;• ★ ▸
 				  ))
 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(exec-path-from-shell use-package simple-httpd ox-latex-subfigure org-superstar org-bullets citeproc-org)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
