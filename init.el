@@ -131,7 +131,7 @@
 ;;  > On peut connecter des tuples pour forcer un style ("phys" par exemple ici).
 ;;  > "t" active la switch "tout le reste". 
 (setq org-cite-export-processors
-      '((latex . (biblatex "authoryear-comp")) ;; fichiers latex
+      '((latex . (biblatex "authoryear")) ;; fichiers latex
       (beamer natbib) ;; pour les beamers
       (t csl))) ;; Pour tout le reste
 
