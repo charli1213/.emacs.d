@@ -153,7 +153,6 @@
 	 :completion-function (lambda (plist)
 				(message "Executing completion function")
 				(shell-command "mv *.tex Fichiers_tex/")
-				(shell-command "mv *.pdf Fichiers_pdf/")
 				(message "Compilation et réorganisation accomplies"))	 
 	 )))
 

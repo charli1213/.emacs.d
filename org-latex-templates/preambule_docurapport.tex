@@ -11,10 +11,12 @@
 \usepackage{lmodern} % Pour les maths? Lmodern pour les maths
 \usepackage{cfr-lm}
 % Use lmodern for sans-serif
-\usepackage{mathrsfs} % Permet la command \mathscr (Lettres attachées genre) \mathscr(B)
+\usepackage{mathrsfs} % Permet la command \mathscr (Lettres attachées genre) \mathscr(ABC)
+\usepackage{eucal}   % Vient changer le \mathcal{ABC} parce que celui de base est laid.
+
 
 % Bibliographie
-\usepackage[backend=biber,style=apa,sorting=ynt]{biblatex}
+\usepackage[backend=biber,style=alphabetic,sorting=ynt,maxbibnames=99]{biblatex}
 %\usepackage[backend=biber,style=ieee,sorting=ynt]{biblatex} % Ça semble tout changer.
 
 
@@ -40,7 +42,6 @@
 \usepackage[french]{babel} % Environnements en Français.
 
 \usepackage{titling} % Donne accès à \theauthor, \thetitle, \thedate
-
 % ==============================BASE-(END)=================================%
 
 
@@ -80,8 +81,16 @@
 \renewcommand{\cftsecfont}{\normalfont}
 \renewcommand{\cftsecpagefont}{\normalfont}
 
+\usepackage[explicit]{titlesec}
+    % Raised Rule Command:
+    % Arg 1 (Optional) - How high to raise the rule
+    % Arg 2 - Thickness of the rule
+    \newcommand{\raisedrulefill}[2][0ex]{\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+    \titleformat{\section}{\Large\bfseries}{\thesection. }{0em}{#1\;\raisedrulefill[0.4ex]{0.25pt}}
+    \titleformat{\subsection}{\large\bfseries}{\thesubsection. }{0em}{#1\;\raisedrulefill[0.4ex]{0.10pt}}
+
 % Change bullet style
-\usepackage{pifont}
+%\usepackage{pifont}
 \usepackage{enumitem}
 %\setlist[itemize,1]{label=\ding{224}}
 \setlist[itemize,1]{label=\ding{239}}
@@ -188,10 +197,10 @@ Police d'écriture : \textbf{CMU Serif Roman}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \setlength{\headheight}{13pt}
-\renewcommand{\headrulewidth}{0.025pt} % Ligne horizontale en haut
+\renewcommand{\headrulewidth}{0.0pt} % Ligne horizontale en haut
 
-\fancyhead[R]{\textit{\thetitle}}
-\fancyhead[L]{\ \thepage}
+\fancyhead[R]{\underline{\textit{Section \thesubsection}}}
+\fancyhead[L]{\underline{\textit{\thepage}}}
 \fancyfoot[R]{\textit{\theauthor}}
 \fancyfoot[L]{}
 \fancyfoot[C]{} 
