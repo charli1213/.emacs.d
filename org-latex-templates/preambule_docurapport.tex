@@ -102,6 +102,7 @@
 % ==============================NEWCOMMANDS================================%
 % CQFD symbol
 \renewcommand{\qedsymbol}{$\hfill\blacksquare$}
+\newcommand{\cqfd}{\hfill$\blacktriangleleft$}
 
 % Vecteurs de base :
 \newcommand{\nvf}{\vb{\hat{n}}}
@@ -112,6 +113,8 @@
 \newcommand{\uu}{\vb{u}}
 \newcommand{\vv}{\vb{v}}
 \newcommand{\ust}{\vb{u}_{\ast}}
+\newcommand{\xx}{\vb{x}}
+\newcommand{\rad}{\text{Rad}}
 
 % Physics empty spaces 
 \newcommand{\short}{\vphantom{pA}}
@@ -141,11 +144,6 @@ size=small, width=2cm, left=-0.25pt, bottom=-0.5pt,
 arc is angular, arc=2.5mm, boxrule=0.35pt, leftrule=4pt, %bottomrule=1pt,
 after={\enskip}] Exemple \end{tcolorbox}}}
 
-\newcommand{\rad}{\text{Rad}}
-
-
-\newcommand{\cqfd}{\hfill$\blacktriangleleft$}
-
 % Define the nota bene environment
 \usepackage{tcolorbox}
 \newtcolorbox{notabene}{
@@ -162,6 +160,9 @@ after={\enskip}] Exemple \end{tcolorbox}}}
 
 \newcommand{\cmark}{\ding{52}}
 \newcommand{\xmark}{\ding{55}}
+
+% Mettre (a,b) à la suite d'une série d'équations horizontales.
+\refstepcounter{equation}\tag{\theequation a,b}
 % ==============================NEWCOMMANDS================================%
 
 
