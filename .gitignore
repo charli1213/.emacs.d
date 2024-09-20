@@ -3,3 +3,4 @@ elpa/*
 eln-cache/*
 tutoriels/*.pdf
 tutoriels/*.tex
+.custom.el

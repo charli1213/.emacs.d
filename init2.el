@@ -74,6 +74,7 @@
   (define-key org-mode-map (kbd "C-c b") #'insert-source-bash))
 
 
+
 ;; >>> -------------------- Fonctionnement Org-Mode -------------------- >>>
 ;; >> Bibliographie 
 ;; Pour utiliser, avoir dernière version de Org. pour regarder
@@ -81,16 +82,16 @@
 ;; Pour installer : 
 ;; M-x list-package (RET) Trouver org (Ret) installer.
 ;; M-x list-package (RET) Trouver citeproc (Ret) installer.
-(require 'citeproc)    ;;; Problème de versions avec Org-mode?
+;(require 'citeproc)
 
 ;; >> Org-Agenda :
 ;; On set l'endroit où se trouvent les agenda :
-(setq org-agenda-files '("~/Desktop/Org-Rapports/"))
+;(setq org-agenda-files '("~/Desktop/Org-Rapports/"))
 
 
 
 ;; >>> -------------------- Exportation Org-LaTeX-PDF -------------------- >>>
-(require 'ox-latex) ;;; Problème de versions avec Org-mode?
+(require 'ox-latex)
 
 ;; >> Titre et sous-titres séparés :
 (add-hook 'org-mode-hook
@@ -144,13 +145,9 @@
          :headline-levels 4
 	 :completion-function (lambda (plist)
 				(message "Executing completion function")
-				(shell-command "mv *.pdf Fichiers_pdf/")
 				(shell-command "mv *.tex Fichiers_tex/")
 				(message "Compilation et réorganisation accomplies"))	 
 	 )))
-
-
-
 
 
 ;; >>> -------------------- ORG-LATEX-CLASSES -------------------- >>>
@@ -194,7 +191,6 @@
 
 
 
-
 ;; >>> -------------------- ESTHÉTIQUE-ORG -------------------- >>>
 ;; >> Indentation activée à l'ouverture d'un fichier org. Ça améliore grandement la lecture du fichier.
 (setq org-startup-indented t)
@@ -209,18 +205,13 @@
 ;; >> retirer les indications ou les "markup symbols" comme /abcd/ et *abcd* dans le fichier org. 
 (setq org-hide-emphasis-markers t)
 ;; >> retirer les bloc #+begin_src et changer la background color
-
-
-;; >> Rendre les blocs de code invisibles
-(setq org-hide-block-startup t)
-
-;; >> Personnaliser l'apparence des blocs de code
+;   > 1. Met un background de couleur foncée derrière les SRC blocs.
 (require 'color)
-(set-face-attribute 'org-block nil
-                    :background (color-saturate-name (face-attribute 'default :background) 20)
-		    :background (color-darken-name (face-attribute 'default :background) 10))
-
-;; >> Personnaliser l'apparence des lignes de début et de fin des blocs de code
+(set-face-attribute 'org-block nil :background
+                    (color-saturate-name ; on sature
+		     (color-darken-name  ; on noircit
+                      (face-attribute 'default :background) -4) 2))
+;;  > 2. Change la couleur du text begin_src // end_src
 (let ((background-color (face-attribute 'default :background)))
   (set-face-attribute 'org-block-begin-line nil
                       :foreground background-color
@@ -232,10 +223,9 @@
 
 ;; > Section : On change le type d'items pour les sections en org:
 ;;   (package-install 'org-superstar) si ça ne marche pas.
-
-;(require 'org-superstar)    ; Conflit avec Org...
-(use-package org-superstar  
-  :ensure t)                ; Conflit avec Org...
+(require 'org-superstar)
+(use-package org-superstar
+  :ensure t)
 
 (setq org-superstar-item-bullet-alist '((?* . "•")
 					(?+ . "▪")  ; "+" devient un carré
