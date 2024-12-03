@@ -5,6 +5,7 @@
 ;; Nos archive de "packages"
 (require 'package)
 
+
 (add-to-list 'package-archives 
   '("org" . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives 
@@ -233,27 +234,35 @@
 ;; > Section : On change le type d'items pour les sections en org:
 ;;   (package-install 'org-superstar) si ça ne marche pas.
 
-;(require 'org-superstar)    ; Conflit avec Org...
-(use-package org-superstar  
-  :ensure t)                ; Conflit avec Org...
+(require 'org-superstar)    ; Conflit avec Org...
+;;(use-package org-superstar  :ensure t)                ; Conflit avec Org...
 
-(setq org-superstar-item-bullet-alist '((?* . "•")
-					(?+ . "▪")  ; "+" devient un carré
-                                        (?- . "•"))) ; "-" devient une bullet
+;;(add-hook 'org-mode-hook (lambda ()
+(with-eval-after-load 'org-superstar 
+  (setq org-superstar-mode 1)
+  ;; >> On change les marqueurs de listes "plain".
+  (setq org-superstar-item-bullet-alist '((?* . "•")
+					  (?+ . "▪")
+					  (?- . "•")))
+  (setq org-superstar-headline-bullets-list '(
+					      ;; Large
+					      ;;"❀"
+					      "☀"
+					      "■"
+					      "◉"
+					      "○"
+					      "✸"
+					      "✜"
+					      ;; ♥ ● ◇ ✚ ✜ ☯ ◆ ♠
+					      ;; ♣ ♦ ☢ ❀ ◆ ◖ ▶"■""▢"
+					      ;; Small
+					      "►"
+					      "•"
+					      ;;• ★ ▸
+					      ))
+  ;; >> On cache les *** dans les listes
+  (setq org-hide-leading-stars t) ;
+  )
+		      
 
-(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-(setq org-superstar-headline-bullets-list '(;;; Large
-					;"❀"
-					    "☀"
-					    "■"
-					    "◉"
-					    "○"
-					    "✸"
-					    "✜"
-					    ;; ♥ ● ◇ ✚ ✜ ☯ ◆ ♠ ♣ ♦ ☢ ❀ ◆ ◖ ▶"■""▢"
-    ;;; Small
-					    "►"
-					    "•"
-					    ;;• ★ ▸
-				  ))
 

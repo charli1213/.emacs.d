@@ -9,16 +9,14 @@
 %\usepackage{pxfonts} % Met le texte ET les maths en Palatino + donne accès à des symboles math
 %\usepackage{palatino} % Cette commande met seulement le texte en police palatino
 \usepackage{lmodern} % Pour les maths? Lmodern pour les maths
-\usepackage{cfr-lm}
-% Use lmodern for sans-serif
+\usepackage{cfr-lm} % Use lmodern for sans-serif
 \usepackage{mathrsfs} % Permet la command \mathscr (Lettres attachées genre) \mathscr(ABC)
 \usepackage{eucal}   % Vient changer le \mathcal{ABC} parce que celui de base est laid.
 
 % Bibliographie
 \usepackage[backend=biber,style=alphabetic,sorting=ynt,maxbibnames=99]{biblatex}
-%\usepackage[backend=biber,style=ieee,sorting=ynt]{biblatex} % Ça semble tout changer.
 
-
+% Stuff
 \usepackage{amsmath, amssymb, amsthm} % Symb. math. (Mathmode+Textmode) + Beaux théorèmes.
 \usepackage{mathtools,cancel,xfrac} % Utilisation de boîtes \boxed{} + \cancelto{}{}, xfrac
 \usepackage{graphicx, wrapfig} % Géstion des figures.
@@ -31,15 +29,16 @@
 \usepackage{physics} % Meilleur package pour physicien. 
 
 % Style
-\usepackage{lipsum} % For fun
-\usepackage{tikz} % Realisation de figures TIKZ.
-\usetikzlibrary{arrows.meta,bending, shapes.geometric, automata, positioning} % Arrow heads et les formes de noeuds
+\usepackage{pgf,tikz} % Realisation de figures TIKZ.
+\usetikzlibrary{arrows.meta,bending, shapes.geometric, automata, positioning, decorations.pathreplacing, math} % Arrow heads et les formes de noeuds
 \usepackage{empheq} % Boite autour de MULTIPLE équations
 \usepackage{bbding}
 
 % Français
 \usepackage[french]{babel} % Environnements en Français.
-
+\frenchbsetup{
+StandardLists=true,
+StandardItemLabels=true} % Sinon, french modifie les itemize
 \usepackage{titling} % Donne accès à \theauthor, \thetitle, \thedate
 % ==============================BASE-(END)=================================%
 
@@ -55,8 +54,6 @@
 % Tableaux/tabular
 % Espace vertical dans les tabular/tableaux
 \renewcommand{\arraystretch}{1.2}
-% Couleur des tableaux/tabular
-% \rowcolors{3}{violet!5}{}
 
 % Couleurs de hyperliens :
 \definecolor{mypink}{RGB}{147, 0, 255}
@@ -71,9 +68,11 @@
 % Numéros d'équations suivent les sections :
 \numberwithin{equation}{section} 
 
+
 % Les « captions » sont en italique et largeur limitée
 \usepackage[textfont = it]{caption} 
 \captionsetup[wrapfigure]{margin=0.5cm}
+
 
 % Retirer l'écriture en gras dans la table des matières
 \usepackage{tocloft}
@@ -81,6 +80,7 @@
 \renewcommand{\cftsecpagefont}{\normalfont}
 
 
+% MODIFICATION DES TITLESECS et SUBTITLESEC
 % On a des lignes à droite des sections et sous-sections
 \usepackage[explicit]{titlesec}
     % Raised Rule Command:
@@ -91,12 +91,10 @@
     \titleformat{\subsection}{\large\bfseries}{\thesubsection. }{0em}{#1\;\raisedrulefill[0.4ex]{0.10pt}}
 
 
-% Change bullet style
-%\usepackage{pifont}
-\usepackage{enumitem}
-%\setlist[itemize,1]{label=\ding{224}}
-%\setlist[itemize,1]{label=\ding{239}}
-%\setlist[itemize,1]{label=$\cdot$}
+% MODIFICATION DES LISTES : 
+\renewcommand{\labelitemi  }{{\raisebox{0.35\height}{\tiny$\blacksquare$}}}
+\renewcommand{\labelitemii }{$\bullet$}
+\renewcommand{\labelitemiii}{{\raisebox{0.35\height}{\tiny$\blacktriangleright$}}}
 \renewcommand{\boxtimes}{\blacksquare}
 % ================================SETTINGS=================================%
 
@@ -136,36 +134,13 @@
 \newcommand{\tpsi}{\tilde{\psi}}
 \newcommand{\tphi}{\tilde{\phi}}
 
-% Nota Bene env : (\ding{89})
+% Nota Bene env :
 %\newcommand{\nb}{$\boxed{\text{\footnotesize\EightStarConvex}\pt \mathfrak{N. B.}}$\hspace{4pt}}
 \newcommand{\nb}{\underline{{\footnotesize\EightStarConvex}\pt $\mathfrak{N.B.}$\vphantom{p}}\hspace{3pt}}
 
-\newcommand{\exemple}{
-\parbox[center]{2.2cm}{\begin{tcolorbox}[sharp corners, rounded corners=northeast, rounded corners=southeast,
-colback=Violet!2, colframe=black,
-size=small, width=2cm, left=-0.25pt, bottom=-0.5pt,
-arc is angular, arc=2.5mm, boxrule=0.35pt, leftrule=4pt, %bottomrule=1pt,
-after={\enskip}] Exemple \end{tcolorbox}}}
-
-% Define the nota bene environment
-\usepackage{tcolorbox}
-\newtcolorbox{notabene}{
-     colback=blue!5,
-     colframe=black,
-     boxrule=0.5pt,
-     arc=2pt,
-     left=5pt,
-     right=5pt,
-     top=5pt,
-     bottom=5pt,
-}
-
-
-\newcommand{\cmark}{\ding{52}}
-\newcommand{\xmark}{\ding{55}}
-
-%\newcommand{\fourier}[1]{\raisebox{-0.4em}{\resizebox{2em}{!}{$\mathscr{F}$}\,}\qty[#1]}
+% Opérateur de transformée de Fourier. 
 \newcommand{\fourier}{\operatorname{\raisebox{-0.4em}{\resizebox{2em}{!}{$\mathscr{F}$}}}}
+
 % Mettre (a,b) à la suite d'une série d'équations horizontales.
 \newcommand{\ab}{\refstepcounter{equation}\tag{\theequation a,b}}
 % ==============================NEWCOMMANDS================================%
