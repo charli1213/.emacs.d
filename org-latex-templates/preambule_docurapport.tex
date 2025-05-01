@@ -14,7 +14,7 @@
 \usepackage{eucal}   % Vient changer le \mathcal{ABC} parce que celui de base est laid.
 
 % Bibliographie
-\usepackage[backend=biber,style=alphabetic,sorting=ynt,maxbibnames=99]{biblatex}
+\usepackage[backend=bibtex,style=alphabetic,sorting=ynt,maxbibnames=99]{biblatex}
 
 % Stuff
 \usepackage{amsmath, amssymb, amsthm} % Symb. math. (Mathmode+Textmode) + Beaux théorèmes.
@@ -63,6 +63,11 @@ StandardItemLabels=true} % Sinon, french modifie les itemize
              citecolor=mypink, 
              linkcolor=mypink, 
              anchorcolor=mypink}
+\definecolor{color1}{RGB}{148,220,236}
+\definecolor{color2}{RGB}{84,76,163}
+\definecolor{color3}{RGB}{108,156,227}
+\definecolor{color4}{RGB}{244,164,156}
+\definecolor{color5}{RGB}{252,204,164}
 
 
 % Numéros d'équations suivent les sections :
@@ -93,8 +98,9 @@ StandardItemLabels=true} % Sinon, french modifie les itemize
 
 % MODIFICATION DES LISTES : 
 \renewcommand{\labelitemi  }{{\raisebox{0.35\height}{\tiny$\blacksquare$}}}
-\renewcommand{\labelitemii }{$\bullet$}
-\renewcommand{\labelitemiii}{{\raisebox{0.35\height}{\tiny$\blacktriangleright$}}}
+\renewcommand{\labelitemii }{{\raisebox{0.35\height}{\tiny$\blacktriangleright$}}}
+\renewcommand{\labelitemiii}{$\bullet$}
+
 \renewcommand{\boxtimes}{\blacksquare}
 % ================================SETTINGS=================================%
 
