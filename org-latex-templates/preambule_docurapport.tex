@@ -23,6 +23,7 @@
 \usepackage{hyperref} % Permettre l'utilisation d'hyperliens.
 \usepackage{color} % Permettre l'utilisation des couleurs.
 \usepackage{colortbl} % Color tables
+\usepackage{tabularx} % Justifier les case des tabulars 
 \usepackage[dvipsnames]{xcolor} % Couleurs avancées.
 
 % Physique
@@ -77,7 +78,8 @@ StandardItemLabels=true} % Sinon, french modifie les itemize
 % Les « captions » sont en italique et largeur limitée
 \usepackage[textfont = it]{caption} 
 \captionsetup[wrapfigure]{margin=0.5cm}
-
+% Les « captions » sont en italique et largeur limitée
+\captionsetup[figure]{margin=1.3cm}
 
 % Retirer l'écriture en gras dans la table des matières
 \usepackage{tocloft}
@@ -96,8 +98,9 @@ StandardItemLabels=true} % Sinon, french modifie les itemize
     \titleformat{\subsection}{\large\bfseries}{\thesubsection. }{0em}{#1\;\raisedrulefill[0.4ex]{0.10pt}}
 
 
-% MODIFICATION DES LISTES : 
-\renewcommand{\labelitemi  }{{\raisebox{0.35\height}{\tiny$\blacksquare$}}}
+% MODIFICATION DES LISTES :
+\newcommand{\sq}{\vcenter{\hbox{\rule{3pt}{3pt}}}}
+\renewcommand{\labelitemi  }{$\sq$}
 \renewcommand{\labelitemii }{{\raisebox{0.35\height}{\tiny$\blacktriangleright$}}}
 \renewcommand{\labelitemiii}{$\bullet$}
 

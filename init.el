@@ -111,13 +111,19 @@
   (setq org-hide-emphasis-markers t)
   ;; >> Rendre les blocs de code invisibles
   (setq org-hide-block-startup t)
+  ;; >> Les "tables" sont maintenant écrasées par défault. 
+  (setq org-startup-align-all-tables t)
   ;; >> Personnaliser l'apparence des blocs de code
   (require 'color)
   (let ((block-color-test
 	 (color-darken-name
-	  (face-attribute 'default :background) -100) ))
+	  (color-saturate-name
+	   (face-attribute 'default :background) 30) -30)
+	 )
+	)
     (set-face-attribute 'org-block nil
 			:background block-color-test
+			:foreground (color-darken-name (face-attribute 'default :foreground) -50)
 			)
     (set-face-attribute 'org-block-begin-line nil
 			:foreground block-color-test
