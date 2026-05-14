@@ -14,7 +14,8 @@
 \usepackage{eucal}   % Vient changer le \mathcal{ABC} parce que celui de base est laid.
 
 % Bibliographie
-\usepackage[backend=bibtex,style=alphabetic,sorting=ynt,maxbibnames=99]{biblatex}
+%\usepackage[backend=bibtex,style=alphabetic,sorting=ynt,maxbibnames=99]{biblatex}
+\usepackage[backend=bibtex,style=abbrev,sorting=ynt,maxbibnames=99]{biblatex}
 
 % Stuff
 \usepackage{amsmath, amssymb, amsthm} % Symb. math. (Mathmode+Textmode) + Beaux théorèmes.
@@ -25,15 +26,17 @@
 \usepackage{colortbl} % Color tables
 \usepackage{tabularx} % Justifier les case des tabulars 
 \usepackage[dvipsnames]{xcolor} % Couleurs avancées.
+\usepackage{pdflscape}
 
 % Physique
 \usepackage{physics} % Meilleur package pour physicien. 
 
 % Style
+\usepackage{tcolorbox} % Permet de créer des boîtes de toutes sortes. 
 \usepackage{pgf,tikz} % Realisation de figures TIKZ.
 \usetikzlibrary{arrows.meta,bending, shapes.geometric, automata, positioning, decorations.pathreplacing, math} % Arrow heads et les formes de noeuds
 \usepackage{empheq} % Boite autour de MULTIPLE équations
-\usepackage{bbding}
+
 
 % Français
 \usepackage[french]{babel} % Environnements en Français.
@@ -145,7 +148,17 @@ StandardItemLabels=true} % Sinon, french modifie les itemize
 
 % Nota Bene env :
 %\newcommand{\nb}{$\boxed{\text{\footnotesize\EightStarConvex}\pt \mathfrak{N. B.}}$\hspace{4pt}}
-\newcommand{\nb}{\underline{{\footnotesize\EightStarConvex}\pt $\mathfrak{N.B.}$\vphantom{p}}\hspace{3pt}}
+%\newcommand{\nb}{\underline{{\footnotesize\EightStarConvex}\pt $\mathfrak{N.B.}$\vphantom{p}}\hspace{3pt}}
+%\newcommand{\nb}{{\footnotesize\EightStarConvex}\pt $\mathfrak{N.B.}$\vphantom{p}\hspace{3pt}}
+\newcommand{\nb}{
+\hspace{-4pt}\raisebox{-0.25\baselineskip}{
+\begin{tikzpicture}
+        \fill [Blue!40] (0,0) -- (0,0.8\baselineskip) -- (1.1,0.8\baselineskip) -- (1.3,0.4\baselineskip) -- (1.1,0) -- cycle;
+        \draw [white, right=-1pt] (0,0.4\baselineskip) node [white] {\footnotesize\raisebox{1pt}{$\sim$}\pt $\mathfrak{N.B.}$};
+\end{tikzpicture}
+}
+}
+%\newcommand{\nb}{\fboxsep2pt\colorbox{Blue!40}{{\color{white}{\footnotesize\raisebox{-1.2pt}{\EightStarConvex}}\pt $\mathfrak{N.B.}$}\,}\hspace{4pt}}
 
 % Opérateur de transformée de Fourier. 
 \newcommand{\fourier}{\operatorname{\raisebox{-0.4em}{\resizebox{2em}{!}{$\mathscr{F}$}}}}

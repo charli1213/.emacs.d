@@ -43,15 +43,24 @@
 (defun insert-source-bash ()
   "Insert a #+begin_src bash and #+end_src"
   (interactive)
-  (insert "#+begin_src bash\n >>> ")
+  (insert "#+begin_src bash\n>>> ")
   (save-excursion
     (insert "\n#+end_src")))
+
+;; > Quotation marks 
+(defun insert-quotation ()
+  "Insert a quotation bloc #+BEGIN_QUOTE and #+END_QUOTE"
+  (interactive)
+  (insert "#+BEGIN_QUOTE\n    ")
+  (save-excursion
+    (insert "\n#+END_QUOTE")))
 
 ;; >> Ajout du mapping des hotkeys.
 (with-eval-after-load 'org
   (define-key org-mode-map (kbd "C-c e") #'insert-latex-equation)
   (define-key org-mode-map (kbd "C-c a") #'insert-latex-align)
-  (define-key org-mode-map (kbd "C-c b") #'insert-source-bash))
+  (define-key org-mode-map (kbd "C-c b") #'insert-source-bash)
+  (define-key org-mode-map (kbd "C-c q") #'insert-quotation))
 
 ;; >>>> -------------------- BULLET LIST (Org-superstar) -------------------- >>>>
 ;; >> Lancement de Org-Superstar lorsqu'on ouvre un fichier org.
@@ -96,6 +105,23 @@
 
 ;; >>>> ---------------------- ESTHÉTIQUE-ORG ---------------------- >>>>
 
+;;  >>> ------ Définition préalables avant le hook ------ >>>
+;;   >> Nouvelles couleurs
+(require 'color)
+(setq background-block-color
+  	 (color-darken-name
+  	  (color-saturate-name
+  	   (face-attribute 'default :background) -50) -50))
+
+;; Redéfinir la face `org-quote` pour les blocs "quote"
+  (setq org-fontify-quote-and-verse-blocks t)
+  (setq org-hide-block-startup t)
+  (set-face-attribute 'org-quote nil
+                      :foreground (color-darken-name (face-attribute 'default :foreground) -50)
+                      :background background-block-color
+                      :slant 'italic)
+
+;; >>>  ------ Tous les « fonctions activées au « hook » de Org-Mode ------ >>>
 (defun my-org-startup-hook-functions ()
   ;; >> Indentation activée à l'ouverture d'un fichier org. Ça améliore grandement la lecture du fichier.
   (org-indent-mode t)
@@ -114,27 +140,22 @@
   ;; >> Les "tables" sont maintenant écrasées par défault. 
   (setq org-startup-align-all-tables t)
   ;; >> Personnaliser l'apparence des blocs de code
-  (require 'color)
-  (let ((block-color-test
-	 (color-darken-name
-	  (color-saturate-name
-	   (face-attribute 'default :background) 30) -30)
-	 )
-	)
-    (set-face-attribute 'org-block nil
-			:background block-color-test
-			:foreground (color-darken-name (face-attribute 'default :foreground) -50)
-			)
-    (set-face-attribute 'org-block-begin-line nil
-			:foreground block-color-test
-			:background block-color-test
-			)
-    (set-face-attribute 'org-block-end-line nil
-			:foreground block-color-test
-			:background block-color-test
-			)
-    )
+  (set-face-attribute 'org-block nil
+  		      :background background-block-color
+  		      :foreground (color-darken-name (face-attribute 'default :foreground) -50)
+  		      )
+  ;;  (set-face-attribute 'org-block-begin-line nil
+  ;;			:foreground (face-attribute 'default :background)
+  ;;			:background (face-attribute 'default :background)
+  ;;			)
+  ;;  (set-face-attribute 'org-block-end-line nil
+  ;;			:foreground (face-attribute 'default :background)
+  ;;			:background (face-attribute 'default :background)
+  ;;			)
+  (message "Hook org-mode activé !")
   )
+
+
 
 ;; >>> Ajout des hooks au lancement d'Org-Mode >>>
 (add-hook 'org-mode-hook #'my-org-startup-hook-functions)
@@ -175,7 +196,6 @@
   ;;  > On exporte les fichiers de compilations auxilières dans tmp, parce que latexmk ne
   ;;    les supprime pas tous (malheureusement) -- donc pour garder ça «clean». 
   (setq org-latex-pdf-process
-	;;	'("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -auxdir=tmp -f %f"))
 	'("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -auxdir=aux -f %f"))
   ;; >> Citations :: Gestion des citations : 
   ;;  > On choisit le processeur : Biblatex, Natbib ou Bibex.
@@ -204,14 +224,18 @@
            :headline-levels 4
 	   :completion-function (lambda (plist)
 				  (message "Executing completion function")
-				  (shell-command "mv *.pdf Fichiers_pdf/")
-				  (shell-command "mv *.tex Fichiers_tex/")
+				  (shell-command "mv *.pdf 'Fichiers pdf'/")
+					;  (shell-command "mv *.tex Fichiers tex/")
+				  (shell-command "rm *.tex ")
 				  (shell-command "rm -rf aux")
 				  (message "Compilation et réorganisation accomplies"))	 
 	   )))
 
 
 
+
+
+  
   ;; >>> -------------------- ORG-LATEX-CLASSES -------------------- >>>
   ;; >> Org-Latex-Classes : On crée la variable org-latex-classes (variable vide)
   (setq org-latex-classes nil)
@@ -249,4 +273,7 @@
   ;;  > Classe LaTeX par défault. 
   (setq org-latex-default-class "org-report")
 
+
+  ;;  > Debug les broken links :
+  (setq org-export-with-broken-links t)
 )
